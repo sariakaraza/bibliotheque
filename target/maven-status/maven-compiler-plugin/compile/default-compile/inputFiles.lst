@@ -1,2 +1,11 @@
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Adherant.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/BibliothecaireService.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/BibliothecaireRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/AccueilController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/AdherantRepository.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/BibliothecaireController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/AdherantController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/LoginController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/Main.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/AdherantService.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Bibliothecaire.java
