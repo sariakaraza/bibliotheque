@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription - Bibliotheque</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/inscription.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
     <h1>INSCRIPTION A LA BIBLIOTHEQUE</h1>

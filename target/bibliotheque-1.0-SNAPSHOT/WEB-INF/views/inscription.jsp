@@ -3,16 +3,17 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription - Bibliothèque</title>
+    <title>Inscription - Bibliotheque</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
-    <h1>Inscription à la bibliothèque</h1>
+    <h1>INSCRIPTION A LA BIBLIOTHEQUE</h1>
 
     <form action="inscription" method="post">
         <label>Nom:</label>
         <input type="text" name="nom" required><br>
 
-        <label>Prénom:</label>
+        <label>Prenom:</label>
         <input type="text" name="prenom" required><br>
 
         <label>Date de naissance:</label>
@@ -24,7 +25,7 @@
             <option value="Etudiant">Etudiant</option>
             <option value="Professeur">Professeur</option>
         </select>
-        
+
         <label>Email:</label>
         <input type="email" name="email" required><br>
 
@@ -34,6 +35,6 @@
         <button type="submit">S'inscrire</button>
     </form>
 
-    <p>Déjà inscrit ? <a href="login">Connectez-vous ici</a></p>
+    <p>Deja inscrit ? <a href="login">Connectez-vous ici</a></p>
 </body>
 </html>

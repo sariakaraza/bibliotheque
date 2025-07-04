@@ -1,6 +1,6 @@
 
 
-Titre :
+(OK) Titre :
 
 Inscrire un adhérent
 
@@ -34,7 +34,7 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
 Se connecter en tant qu’adhérent ou bibliothécaire
 
