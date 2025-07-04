@@ -183,6 +183,7 @@ button[type="submit"]:active {
     transform: translateY(0);
 }
 
+
 /* Effet de brillance sur le bouton */
 button[type="submit"]::before {
     content: '';
@@ -198,6 +199,13 @@ button[type="submit"]::before {
 button[type="submit"]:hover::before {
     left: 100%;
 }
+
+.lien-catalogue {
+    text-decoration: underline; 
+    font-style: italic;         
+    color: brown;             
+}
+
 
 /* Messages d'erreur */
 p[style*="color:red"], .error-message {
