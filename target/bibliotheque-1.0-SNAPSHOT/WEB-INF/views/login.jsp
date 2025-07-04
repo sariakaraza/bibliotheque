@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Bibliotheque</title>
-    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css"> --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
     <h1>CONNEXION A LA BIBLIOTHEQUE</h1>

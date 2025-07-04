@@ -82,4 +82,14 @@ public class Livre {
     public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
+
+    public List<Exemplaire> getExemplaires() {
+        return exemplaires;
+    }
+
+    public void setExemplaires(List<Exemplaire> exemplaires) {
+        this.exemplaires = exemplaires;
+    }
+
+    
 }

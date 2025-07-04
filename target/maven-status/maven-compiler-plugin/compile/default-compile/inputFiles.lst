@@ -13,6 +13,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ProfilRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Livre.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ExemplaireRepository.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/DureePretRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/PretRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/AccueilController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/DureePret.java

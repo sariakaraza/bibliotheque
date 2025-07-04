@@ -13,6 +13,7 @@ com/springjpa/service/BibliothecaireService.class
 com/springjpa/entity/Adherant.class
 com/springjpa/controller/InscriptionController.class
 com/springjpa/repository/ProfilRepository.class
+com/springjpa/repository/DureePretRepository.class
 com/springjpa/repository/LivreRepository.class
 com/springjpa/entity/Livre.class
 com/springjpa/controller/AdherantController.class
