@@ -1,5 +1,5 @@
 
-INSERT INTO profil (nom_profil, quota_pret, quota_reservation, cotisation, duree_penalite) VALUES
+INSERT INTO profil (nomProfil, quotaPret, quotaReservation, cotisation, dureePenalite) VALUES
 ('Enfant', 3, 1, 1000, 5),
 ('Etudiant', 5, 3, 2000, 10),
 ('Professeur', 10, 5, 5000, 15);

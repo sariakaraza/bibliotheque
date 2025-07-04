@@ -25,7 +25,6 @@ Scénario alternatif :
 
 Règles de gestion :
 
-* L’email ne doit pas déjà exister.
 * Tous les champs obligatoires doivent être remplis.
 
 Résultat :

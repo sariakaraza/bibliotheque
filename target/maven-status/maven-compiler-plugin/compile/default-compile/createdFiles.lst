@@ -1,10 +1,13 @@
 com/springjpa/controller/AccueilController.class
-com/springjpa/repository/BibliothecaireRepository.class
-com/springjpa/service/AdherantService.class
 com/springjpa/repository/AdherantRepository.class
 com/springjpa/controller/AdherantController.class
-com/springjpa/controller/BibliothecaireController.class
 com/springjpa/entity/Bibliothecaire.class
+com/springjpa/controller/LoginController.class
+com/springjpa/repository/BibliothecaireRepository.class
+com/springjpa/entity/Profil.class
+com/springjpa/service/AdherantService.class
+com/springjpa/controller/BibliothecaireController.class
 com/springjpa/service/BibliothecaireService.class
 com/springjpa/entity/Adherant.class
-com/springjpa/controller/LoginController.class
+com/springjpa/controller/InscriptionController.class
+com/springjpa/repository/ProfilRepository.class

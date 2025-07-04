@@ -1,7 +1,10 @@
 package com.springjpa.service;
 
 import com.springjpa.entity.Adherant;
+import com.springjpa.entity.Profil;
 import com.springjpa.repository.AdherantRepository;
+import com.springjpa.repository.ProfilRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,9 @@ public class AdherantService {
 
     @Autowired
     private AdherantRepository adherantRepository;
+
+    @Autowired
+    private ProfilRepository profilRepository;
 
     public List<Adherant> getAllAdherants() {
         return adherantRepository.findAll();
@@ -36,4 +42,10 @@ public class AdherantService {
     public Adherant findByEmailAndPassword(String email, String password) {
         return adherantRepository.findByEmailAndPassword(email, password);
     }
+
+    // public Adherant inscrireAdherant(Adherant adherant) {
+    //     Profil profilDefaut = profilRepository.findByNomProfil("Adhérent");
+    //     adherant.setProfil(profilDefaut);
+    //     return adherantRepository.save(adherant);
+    // }
 }

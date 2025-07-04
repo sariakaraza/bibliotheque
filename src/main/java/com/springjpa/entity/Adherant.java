@@ -21,18 +21,24 @@ public class Adherant {
 
     private String password;
 
-    private Integer idProfil;
+    @ManyToOne
+    @JoinColumn(name = "id_profil", nullable = false)
+    private Profil profil;
+
     public Adherant() {}
 
+    
 
-    public Adherant(String nomAdherant, String prenomAdherant, LocalDate dateNaissance, String email, String password, Integer profil) {
+    public Adherant(String nomAdherant, String prenomAdherant, LocalDate dateNaissance, String email, String password,
+            Profil profil) {
         this.nomAdherant = nomAdherant;
         this.prenomAdherant = prenomAdherant;
         this.dateNaissance = dateNaissance;
         this.email = email;
         this.password = password;
-        this.idProfil = profil;
+        this.profil = profil;
     }
+
 
     public Integer getIdAdherant() {
         return idAdherant;
@@ -74,14 +80,6 @@ public class Adherant {
         this.password = password;
     }
 
-    public Integer getIdProfil() {
-        return idProfil;
-    }
-
-    public void setIdProfil(Integer idProfil) {
-        this.idProfil = idProfil;
-    }
-
 
     public String getEmail() {
         return email;
@@ -90,6 +88,18 @@ public class Adherant {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+
+    public Profil getProfil() {
+        return profil;
+    }
+
+
+
+    public void setProfil(Profil profil) {
+        this.profil = profil;
     }
 
    

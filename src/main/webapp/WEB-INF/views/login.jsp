@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Bibliothèque</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/hello.css">
+    <title>Connexion - Bibliotheque</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
 </head>
 <body>
     <h1>CONNEXION A LA BIBLIOTHEQUE</h1>
@@ -22,5 +22,6 @@
         <p th:if="${error}" style="color:red;">${error}</p>
     </form>
 
+    <p>Pas encore inscrit ? <a href="inscription">Inscrivez-vous ici</a></p>
 </body>
 </html>
