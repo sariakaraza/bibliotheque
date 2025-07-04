@@ -34,14 +34,14 @@ public class LoginController {
         if (bibliothecaire != null) {
             session.setAttribute("userType", "bibliothecaire");
             session.setAttribute("userId", bibliothecaire.getIdAdmin());
-            return "home1";
+            return "pret";
         }
 
         Adherant adherant = adherantService.findByEmailAndPassword(email, password);
         if (adherant != null) {
             session.setAttribute("userType", "adherant");
             session.setAttribute("userId", adherant.getIdAdherant());
-            return "home2";
+            return "catalogue";
         }
 
         model.addAttribute("error", "Identifiants incorrects");

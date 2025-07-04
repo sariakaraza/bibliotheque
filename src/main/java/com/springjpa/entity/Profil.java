@@ -20,6 +20,8 @@ public class Profil {
     @OneToMany(mappedBy = "profil")
     private List<Adherant> adherants;
 
+    @OneToMany(mappedBy = "profil", cascade = CascadeType.ALL)
+    private List<DureePret> dureesPret;
 
     public Integer getIdProfil() {
         return idProfil;
@@ -75,5 +77,14 @@ public class Profil {
 
     public void setAdherants(List<Adherant> adherants) {
         this.adherants = adherants;
+    }
+
+
+    public List<DureePret> getDureesPret() {
+        return dureesPret;
+    }
+
+    public void setDureesPret(List<DureePret> dureesPret) {
+        this.dureesPret = dureesPret;
     }
 }

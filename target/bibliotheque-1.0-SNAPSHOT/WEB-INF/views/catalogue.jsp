@@ -1,0 +1,38 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalogue des Livres</title>
+</head>
+<body>
+
+<h1>Catalogue des Livres</h1>
+
+<c:choose>
+    <c:when test="${not empty livres}">
+        <c:forEach var="livre" items="${livres}">
+            <h2>${livre.titre}</h2>
+            <p>Auteur : ${livre.auteur} | Année : ${livre.anneePublication}</p>
+            <ul>
+                <c:forEach var="ex" items="${livre.exemplaires}">
+                    <li>
+                        Exemplaire n°${ex.idExemplaire} -
+                        <span class="statut 
+                            ${ex.statutExemplaire.nomStatut eq 'disponible' ? 'disponible' : 
+                              ex.statutExemplaire.nomStatut eq 'réservé' ? 'reserve' : 
+                              'indisponible'}">
+                            ${ex.statutExemplaire.nomStatut}
+                        </span>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        <p>Aucun livre n'est disponible pour le moment.</p>
+    </c:otherwise>
+</c:choose>
+
+</body>
+</html>

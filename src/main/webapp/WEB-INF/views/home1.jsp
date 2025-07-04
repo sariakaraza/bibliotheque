@@ -1,1 +1,0 @@
-<h1>BIENVENUE ADMIN</h1>

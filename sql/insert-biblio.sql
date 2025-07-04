@@ -5,7 +5,7 @@ INSERT INTO profil (nomProfil, quotaPret, quotaReservation, cotisation, dureePen
 ('Professeur', 10, 5, 5000, 15);
 
 -- Adhérants
-INSERT INTO adherant (nomAdherant, prenomAdherant, dateNaissance, password, email, idProfil) VALUES
+INSERT INTO adherant (nomAdherant, prenomAdherant, dateNaissance, password, email, id_profil) VALUES
 ('Randria', 'Miora', '2010-05-12', 'pass1', 'miora.randria@example.com', 1),
 ('Rakoto', 'Jean', '2003-09-21', 'pass2', 'jean.rakoto@example.com', 2),
 ('Rabe', 'Tiana', '1985-11-10', 'pass3', 'tiana.rabe@example.com', 3),
@@ -15,28 +15,65 @@ INSERT INTO adherant (nomAdherant, prenomAdherant, dateNaissance, password, emai
 INSERT INTO admin (nomAdmin, prenomAdmin, password, email) VALUES 
 ('Raza', 'Sariaka', 'admin123', 'sariaka.raza@example.com');
 
-INSERT INTO auteur (nom_auteur, prenom_auteur) VALUES
+
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, auteur)
+VALUES ('Charlie et la chocolaterie', 1964, 176, 8, 'Roald Dahl');
+
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, auteur)
+VALUES ('Le Lion', 1958, 256, 12, 'Joseph Kessel');
+
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, auteur)
+VALUES ('Hunger Games', 2008, 384, 14, 'Suzanne Collins');
+
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, auteur)
+VALUES ('Da Vinci Code', 2003, 489, 16, 'Dan Brown');
+
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, auteur)
+VALUES ('American Psycho', 1991, 399, 18, 'Bret Easton Ellis');
+
+
+INSERT INTO statut_exemplaire (nomStatut) VALUES ('disponible');
+INSERT INTO statut_exemplaire (nomStatut) VALUES ('reserve');
+INSERT INTO statut_exemplaire (nomStatut) VALUES ('indisponible');
+
+-- Livre 1 : disponible
+INSERT INTO exemplaire (id_livre, id_statut_exemplaire) VALUES (1, 1);
+
+-- Livre 2 : réservé
+INSERT INTO exemplaire (id_livre, id_statut_exemplaire) VALUES (2, 2);
+
+-- Livre 3 : indisponible
+INSERT INTO exemplaire (id_livre, id_statut_exemplaire) VALUES (3, 3);
+
+-- Livre 4 : disponible
+INSERT INTO exemplaire (id_livre, id_statut_exemplaire) VALUES (4, 1);
+
+-- Livre 5 : réservé
+INSERT INTO exemplaire (id_livre, id_statut_exemplaire) VALUES (5, 2);
+
+
+INSERT INTO auteur (nomAuteur, prenomAuteur) VALUES
 ('Verne', 'Jules'),
 ('Rowling', 'J.K.'),
 ('Tolkien', 'J.R.R.'),
 ('Camus', 'Albert'),
 ('Zola', 'Émile');
 
-INSERT INTO editeur (nom_editeur, localisation) VALUES
+INSERT INTO editeur (nomEditeur, localisation) VALUES
 ('Gallimard', 'Paris'),
 ('Hachette', 'Paris'),
 ('Flammarion', 'Lyon'),
 ('Bayard', 'Toulouse'),
 ('Actes Sud', 'Arles');
 
-INSERT INTO categorie (nom_categorie) VALUES
+INSERT INTO categorie (nomCategorie) VALUES
 ('Roman'),
 ('Science-Fiction'),
 ('Fantastique'),
 ('Philosophie'),
 ('Histoire');
 
-INSERT INTO livre (titre, annee_publication, nb_page, age_restriction, id_editeur, id_auteur) VALUES
+INSERT INTO livre (titre, anneePublication, nbPage, ageRestriction, idEditeur, idAuteur) VALUES
 ('Voyage au centre de la Terre', 1864, 300, 10, 1, 1),
 ('Harry Potter à l’école des sorciers', 1997, 350, 9, 2, 2),
 ('Le Seigneur des Anneaux', 1954, 600, 12, 3, 3),
@@ -58,7 +95,7 @@ INSERT INTO exemplaire (id_livre) VALUES
 (6), (7), (8), (9), (10),
 (11), (12), (13), (14), (15);
 
-INSERT INTO statut_exemplaire (nom_statut) VALUES
+INSERT INTO statut_exemplaire (nomStatut) VALUES
 ('disponible'),
 ('reserve'),
 ('indisponible');
@@ -76,6 +113,19 @@ INSERT INTO statut_exemplaire_livre VALUES (7, 3), (8, 2), (9, 1);
 INSERT INTO statut_exemplaire_livre VALUES
 (10, 1), (11, 1), (12, 1), (13, 1), (14, 1), (15, 1);
 
+-- Enfant : livres 1, 2, 3
+INSERT INTO exemplaire (id_livre, id_statut) VALUES (1, 3), (2, 2), (3, 1);
+
+-- Etudiant : livres 4, 5, 6
+INSERT INTO exemplaire (id_livre, id_statut) VALUES (4, 3), (5, 2), (6, 1);
+
+-- Professeur : livres 7, 8, 9
+INSERT INTO exemplaire (id_livre, id_statut) VALUES (7, 3), (8, 2), (9, 1);
+
+-- Le reste (livres 10 à 15) → disponibles (statut 1)
+INSERT INTO exemplaire (id_livre, id_statut) VALUES
+(10, 1), (11, 1), (12, 1), (13, 1), (14, 1), (15, 1);
+
 
 -- Enfant
 INSERT INTO categorie_profil VALUES (1, 1), (2, 1);
@@ -89,7 +139,7 @@ INSERT INTO categorie_profil VALUES (1, 3), (4, 3), (5, 3);
 
 -- Adhérent 1 (janvier à mars 2025)
 INSERT INTO abonnement (date_debut, date_fin, id_adherant) VALUES
-('2025-01-10', '2025-03-10', 1);
+('2025-01-10', '2025-12-10', 1);
 
 -- Adhérent 2 (février à avril 2025)
 INSERT INTO abonnement (date_debut, date_fin, id_adherant) VALUES
@@ -102,3 +152,7 @@ INSERT INTO abonnement (date_debut, date_fin, id_adherant) VALUES
 -- Adhérent 4 (avril à juin 2025)
 INSERT INTO abonnement (date_debut, date_fin, id_adherant) VALUES
 ('2025-04-05', '2025-12-05', 4);
+
+INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (1, 1, 10);
+INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (2, 1, 15);
+INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (3, 1, 21);

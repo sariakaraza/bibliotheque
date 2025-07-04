@@ -1,15 +1,11 @@
-CREATE TABLE auteur(
-   id_auteur INT AUTO_INCREMENT,
-   nom_auteur VARCHAR(50) NOT NULL,
-   prenom_auteur VARCHAR(50),
-   PRIMARY KEY(id_auteur)
-);
-
-CREATE TABLE editeur(
-   id_editeur INT AUTO_INCREMENT,
-   nom_editeur VARCHAR(50),
-   localisation VARCHAR(50),
-   PRIMARY KEY(id_editeur)
+CREATE TABLE livre(
+   id_livre INT AUTO_INCREMENT,
+   titre VARCHAR(50),
+   annee_publication INT,
+   nb_page INT,
+   age_restriction INT,
+   auteur VARCHAR(50),
+   PRIMARY KEY(id_livre)
 );
 
 CREATE TABLE categorie(
@@ -20,7 +16,7 @@ CREATE TABLE categorie(
 
 CREATE TABLE profil(
    id_profil INT AUTO_INCREMENT,
-   nom_profil VARCHAR(50) NOT NULL,
+   nom_profil INT NOT NULL,
    quota_pret INT,
    quota_reservation INT,
    cotisation DECIMAL(15,2),
@@ -32,7 +28,6 @@ CREATE TABLE admin(
    id_admin INT AUTO_INCREMENT,
    nom_admin VARCHAR(50),
    prenom_admin VARCHAR(50),
-   email VARCHAR(100),
    password VARCHAR(50),
    PRIMARY KEY(id_admin)
 );
@@ -75,17 +70,11 @@ CREATE TABLE statut_exemplaire(
    PRIMARY KEY(id_statut_exemplaire)
 );
 
-CREATE TABLE livre(
-   id_livre INT AUTO_INCREMENT,
-   titre VARCHAR(50),
-   annee_publication INT,
-   nb_page INT,
-   age_restriction INT,
-   id_editeur INT NOT NULL,
-   id_auteur INT NOT NULL,
-   PRIMARY KEY(id_livre),
-   FOREIGN KEY(id_editeur) REFERENCES editeur(id_editeur),
-   FOREIGN KEY(id_auteur) REFERENCES auteur(id_auteur)
+CREATE TABLE exemplaire(
+   id_exemplaire INT AUTO_INCREMENT,
+   id_livre INT NOT NULL,
+   PRIMARY KEY(id_exemplaire),
+   FOREIGN KEY(id_livre) REFERENCES livre(id_livre)
 );
 
 CREATE TABLE adherant(
@@ -93,11 +82,22 @@ CREATE TABLE adherant(
    nom_adherant VARCHAR(50),
    prenom_adherant VARCHAR(50),
    date_naissance DATE,
-   email VARCHAR(100),
    password VARCHAR(50),
    id_profil INT NOT NULL,
    PRIMARY KEY(id_adherant),
    FOREIGN KEY(id_profil) REFERENCES profil(id_profil)
+);
+
+CREATE TABLE reservation(
+   id_reservation INT,
+   date_de_reservation DATETIME,
+   id_admin INT NOT NULL,
+   id_exemplaire INT NOT NULL,
+   id_adherant INT NOT NULL,
+   PRIMARY KEY(id_reservation),
+   FOREIGN KEY(id_admin) REFERENCES admin(id_admin),
+   FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
+   FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
 );
 
 CREATE TABLE abonnement(
@@ -112,17 +112,9 @@ CREATE TABLE abonnement(
 CREATE TABLE penalite(
    id_penalite INT AUTO_INCREMENT,
    duree INT,
-   date_penalite DATETIME,
    id_adherant INT NOT NULL,
    PRIMARY KEY(id_penalite),
    FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
-);
-
-CREATE TABLE exemplaire(
-   id_exemplaire INT AUTO_INCREMENT,
-   id_livre INT NOT NULL,
-   PRIMARY KEY(id_exemplaire),
-   FOREIGN KEY(id_livre) REFERENCES livre(id_livre)
 );
 
 CREATE TABLE pret(
@@ -135,18 +127,6 @@ CREATE TABLE pret(
    PRIMARY KEY(id_pret),
    FOREIGN KEY(id_admin) REFERENCES admin(id_admin),
    FOREIGN KEY(id_type_pret) REFERENCES type_pret(id_type_pret),
-   FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
-   FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
-);
-
-CREATE TABLE reservation(
-   id_reservation INT,
-   date_de_reservation DATETIME,
-   id_admin INT NOT NULL,
-   id_exemplaire INT NOT NULL,
-   id_adherant INT NOT NULL,
-   PRIMARY KEY(id_reservation),
-   FOREIGN KEY(id_admin) REFERENCES admin(id_admin),
    FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
    FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
 );
