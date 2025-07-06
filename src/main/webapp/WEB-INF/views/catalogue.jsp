@@ -19,12 +19,7 @@
                 <c:forEach var="ex" items="${livre.exemplaires}">
                     <li>
                         Exemplaire n°${ex.idExemplaire} -
-                        <span class="statut 
-                            ${ex.statutExemplaire.nomStatut eq 'disponible' ? 'disponible' : 
-                              ex.statutExemplaire.nomStatut eq 'réservé' ? 'reserve' : 
-                              'indisponible'}">
-                            ${ex.statutExemplaire.nomStatut}
-                        </span>
+                        <span class="statut">${ex.dernierStatutTemporaire}</span>
                     </li>
                 </c:forEach>
             </ul>
