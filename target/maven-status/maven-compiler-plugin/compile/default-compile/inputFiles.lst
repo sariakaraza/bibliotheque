@@ -4,7 +4,6 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/BibliothecaireRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/PretService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/QuotaTypePret.java
-/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/CatalogueController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/AdherantRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Categorie.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/StatutExemplaireRepository.java

@@ -8,7 +8,6 @@ com/springjpa/entity/Profil.class
 com/springjpa/repository/CategorieRepository.class
 com/springjpa/entity/StatutExemplaire.class
 com/springjpa/entity/DureePret.class
-com/springjpa/controller/CatalogueController.class
 com/springjpa/service/BibliothecaireService.class
 com/springjpa/entity/Adherant.class
 com/springjpa/controller/InscriptionController.class
