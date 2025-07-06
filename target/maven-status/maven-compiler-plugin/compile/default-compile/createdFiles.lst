@@ -13,12 +13,15 @@ com/springjpa/service/BibliothecaireService.class
 com/springjpa/entity/Adherant.class
 com/springjpa/controller/InscriptionController.class
 com/springjpa/repository/ProfilRepository.class
+com/springjpa/repository/DureePretRepository.class
 com/springjpa/repository/LivreRepository.class
+com/springjpa/repository/StatutExemplaireRepository.class
 com/springjpa/entity/Livre.class
 com/springjpa/controller/AdherantController.class
 com/springjpa/repository/ExemplaireRepository.class
 com/springjpa/controller/PretController.class
 com/springjpa/entity/Bibliothecaire.class
+com/springjpa/repository/ExemplaireStatutRepository.class
 com/springjpa/entity/Exemplaire.class
 com/springjpa/service/LivreService.class
 com/springjpa/entity/Pret.class
@@ -28,6 +31,7 @@ com/springjpa/repository/AbonnementRepository.class
 com/springjpa/service/AdherantService.class
 com/springjpa/entity/QuotaTypePret.class
 com/springjpa/entity/Categorie.class
+com/springjpa/entity/ExemplaireStatut.class
 com/springjpa/controller/BibliothecaireController.class
 com/springjpa/entity/TypePret.class
 com/springjpa/repository/TypePretRepository.class

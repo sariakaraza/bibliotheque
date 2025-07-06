@@ -13,10 +13,6 @@ public class Exemplaire {
     @JoinColumn(name = "id_livre", nullable = false)
     private Livre livre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_statut_exemplaire", nullable = false)
-    private StatutExemplaire statutExemplaire;
-
     public Integer getIdExemplaire() {
         return idExemplaire;
     }
@@ -33,12 +29,15 @@ public class Exemplaire {
         this.livre = livre;
     }
 
-    public StatutExemplaire getStatutExemplaire() {
-        return statutExemplaire;
+    @Transient
+    private String dernierStatutTemporaire;
+
+    public String getDernierStatutTemporaire() {
+        return dernierStatutTemporaire;
     }
 
-    public void setStatutExemplaire(StatutExemplaire statutExemplaire) {
-        this.statutExemplaire = statutExemplaire;
+    public void setDernierStatutTemporaire(String statut) {
+        this.dernierStatutTemporaire = statut;
     }
 
     

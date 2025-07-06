@@ -30,6 +30,9 @@ public class Pret {
     @JoinColumn(name = "id_adherant", nullable = false)
     private Adherant adherant;
 
+    @Column(name = "date_fin")
+    private LocalDateTime dateFin;
+
     // Constructeurs
     public Pret() {}
 
@@ -90,4 +93,14 @@ public class Pret {
     public void setAdherant(Adherant adherant) {
         this.adherant = adherant;
     }
+
+    public LocalDateTime getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(LocalDateTime dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    
 }

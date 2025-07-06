@@ -156,3 +156,16 @@ INSERT INTO abonnement (date_debut, date_fin, id_adherant) VALUES
 INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (1, 1, 10);
 INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (2, 1, 15);
 INSERT INTO quota_type_pret (id_profil, id_type_pret, quota) VALUES (3, 1, 21);
+
+INSERT INTO duree_pret (duree, id_profil) VALUES (10, 1);
+INSERT INTO duree_pret (duree, id_profil) VALUES (15, 2);
+INSERT INTO duree_pret (duree, id_profil) VALUES (21, 3);
+
+INSERT INTO exemplaire_statut (id_exemplaire, id_statut_exemplaire, date_statut)
+VALUES (1, 1, NOW()); -- Ex. 1 → disponible
+INSERT INTO exemplaire_statut (id_exemplaire, id_statut_exemplaire, date_statut)
+VALUES 
+  (2, 1, NOW()),  -- disponible
+  (5, 1, NOW()),  -- disponible
+  (3, 3, NOW()),  -- indisponible
+  (4, 2, NOW());  -- réservé
