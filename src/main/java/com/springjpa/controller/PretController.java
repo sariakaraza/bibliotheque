@@ -41,4 +41,6 @@ public class PretController {
         }
         return "pret";  // retourne la même page avec message
     }
+
+
 }

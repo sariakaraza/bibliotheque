@@ -1,6 +1,7 @@
 package com.springjpa.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,9 @@ public interface PretRepository extends JpaRepository<Pret, Integer> {
     long countPretsActifsHorsSurPlace(@Param("idAdherant") Integer idAdherant,
                                       @Param("datePret") LocalDateTime datePret,
                                       @Param("typePretExclu") TypePret typePretExclu);
-    
-    
 
+    @Query("SELECT p FROM Pret p WHERE p.idPret NOT IN (SELECT r.pret.idPret FROM Retour r)")
+    List<Pret> findAllPretsNonRetournes();
+                                      
+                                    
 }
