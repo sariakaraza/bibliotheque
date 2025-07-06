@@ -1,0 +1,338 @@
+
+
+(OK) Titre :
+
+Inscrire un adhérent
+
+Utilisateur :
+
+Visiteur/Bibliothécaire
+
+Input :
+
+Nom, prénom, date de naissance, profil, email, mot de passe
+
+Scénario nominal :
+
+* Le visiteur accède à la page d’inscription.
+* Il saisit ses informations (nom, prénom, email, mot de passe).
+* Il clique sur le bouton "S’inscrire".
+* Le système crée un compte avec un profil par défaut (adhérent).
+
+Scénario alternatif :
+
+* Redirection vers une page d’erreur (email déjà utilisé, champs vides…).
+
+Règles de gestion :
+
+* Tous les champs obligatoires doivent être remplis.
+
+Résultat :
+
+* L’utilisateur devient un adhérent actif dans le système.
+
+---
+
+
+(OK) Titre :
+
+Se connecter en tant qu’adhérent ou bibliothécaire
+
+Utilisateur :
+
+Adhérent ou bibliothécaire
+
+Input :
+
+Email, mot de passe
+
+Scénario nominal :
+
+* L’utilisateur accède à la page de connexion.
+* Il entre son email et mot de passe.
+* Le système :
+
+  * Vérifie si les identifiants sont valides.
+  * Démarre une session selon le type :
+
+    * Bibliothécaire → session `[0, id_admin]`
+    * Adhérent → session `[1, id_adherant]`
+
+Scénario alternatif :
+
+* Message d’erreur "Identifiants incorrects".
+
+Règles de gestion :
+
+* L’email et le mot de passe doivent correspondre à un compte existant.
+
+Résultat :
+
+* Accès autorisé selon le type d’utilisateur.
+
+---
+
+
+Titre :
+
+Prêter un exemplaire d’un livre
+
+Utilisateur :
+
+Bibliothécaire
+
+Input :
+
+Numéro adhérent, numéro exemplaire, type de prêt
+
+Scénario nominal :
+
+* Le bibliothécaire se connecte.
+* Il accède au menu « Prêt ».
+* Il saisit les champs « adhérent », « exemplaire », « type de prêt ».
+* Le prêt est enregistré avec une date de retour calculée.
+
+Scénario alternatif :
+
+* Message d’erreur si :
+
+  * L’adhérent est pénalisé.
+  * Le quota est dépassé.
+  * L’exemplaire est indisponible.
+
+Règles de gestion :
+
+* L’adhérent doit être actif.
+* Il ne doit pas être pénalisé.
+* Le quota pour ce type de prêt ne doit pas être dépassé.
+* L’exemplaire doit être disponible.
+* La durée du prêt est calculée selon le profil et le type de prêt (jours fériés inclus).
+
+Résultat :
+
+* L’exemplaire devient non disponible.
+* Le quota de l’adhérent est mis à jour.
+* Le prêt est enregistré.
+
+---
+
+
+Titre :
+
+Réserver un exemplaire (adhérent)
+
+Utilisateur :
+
+Adhérent
+
+Input :
+
+Exemplaire, date de réservation
+
+Scénario nominal :
+
+* L’adhérent connecté accède au catalogue.
+* Il sélectionne un exemplaire disponible.
+* Il choisit une date de réservation.
+* La demande est enregistrée avec le statut "en attente".
+
+Scénario alternatif :
+
+* Exemplaire indisponible → message d’erreur.
+* Adhérent non connecté → redirection vers la page de connexion.
+
+Règles de gestion :
+
+* L’adhérent doit être connecté.
+* L’exemplaire doit être disponible.
+
+Résultat :
+
+* Une demande de réservation est enregistrée.
+
+---
+
+
+Titre :
+
+Accepter ou refuser une réservation (bibliothécaire)
+
+Utilisateur :
+
+Bibliothécaire
+
+Input :
+
+Identifiant de réservation
+
+Scénario nominal :
+
+* Le bibliothécaire accède à la liste des réservations.
+* Il clique sur "Accepter" ou "Refuser" :
+
+  * Met à jour la réservation :
+
+    * Statut = accepté ou refusé
+    * Date de réponse = aujourd’hui
+
+Scénario alternatif :
+
+* Réservation introuvable → message d’erreur.
+
+Règles de gestion :
+
+* La réservation doit être en attente.
+* L’exemplaire doit être toujours disponible (si accepté).
+
+Résultat :
+
+* Statut mis à jour.
+* Historique des décisions conservé.
+
+---
+
+
+Titre :
+
+Prolonger un prêt (adhérent)
+
+Utilisateur :
+
+Adhérent
+
+Input :
+
+Identifiant du prêt
+
+Scénario nominal :
+
+* L’adhérent accède à la liste de ses prêts.
+* Il clique sur "Prolonger" pour un prêt éligible.
+* Une demande de prolongation est créée avec date du jour.
+
+Scénario alternatif :
+
+* Message d’erreur si :
+
+  * Déjà prolongé
+  * Non encore retourné
+
+Règles de gestion :
+
+* Le prêt ne doit pas déjà avoir été prolongé.
+* Il ne doit pas être déjà retourné.
+
+Résultat :
+
+* Une demande est envoyée au bibliothécaire.
+* En attente d'approbation.
+
+---
+
+
+Titre :
+
+Accepter ou refuser une demande de prolongement
+
+Utilisateur :
+
+Bibliothécaire
+
+Input :
+
+Identifiant du prolongement
+
+Scénario nominal :
+
+* Le bibliothécaire accède aux demandes de prolongement.
+* Il clique sur "Accepter" :
+
+  * Ajoute X jours à la date de retour (selon règles).
+  * Met à jour le statut.
+* Ou clique sur "Refuser" :
+
+  * Le prêt reste inchangé.
+  * Statut mis à "refusé".
+
+Scénario alternatif :
+
+* Prolongement inexistant → erreur.
+
+Règles de gestion :
+
+* Un prêt ne peut être prolongé qu’une seule fois.
+* Le prêt doit être en cours.
+
+Résultat :
+
+* Statut du prolongement mis à jour.
+* Historique conservé.
+
+---
+
+
+Titre :
+
+Penaliser un adhérent
+
+Utilisateur :
+
+Bibliothécaire (automatiquement ou via retour en retard)
+
+Input :
+
+Identifiant adhérent, durée de la pénalité
+
+Scénario nominal :
+
+* Lors d’un retour, le système compare la date réelle et la date prévue.
+* Si la date réelle > date prévue :
+
+  * Une pénalité est automatiquement créée avec la durée définie dans le profil.
+
+Scénario alternatif :
+
+* Aucune pénalité si retour à temps.
+
+Règles de gestion :
+
+* La durée de la pénalité dépend du profil.
+* La pénalité est liée à l’adhérent et à la date du retour.
+
+Résultat :
+
+* L’adhérent est bloqué pendant la durée de la pénalité.
+* Impossible d’emprunter ou de réserver pendant cette période.
+
+---
+
+
+(OK) Titre :
+
+Lister les livres/exemplaires avec leur statut
+
+Utilisateur :
+
+Adhérent ou Bibliothécaire
+
+Input :
+
+Aucun (lecture seule)
+
+Scénario nominal :
+
+* L’utilisateur accède à la page du catalogue.
+* Le système affiche tous les livres disponibles.
+* Pour chaque livre, le système affiche les exemplaires associés et leur statut (disponible, en prêt, réservé, etc.).
+
+Scénario alternatif :
+
+* Le catalogue est vide → message indiquant qu’aucun livre n’est disponible.
+
+Règles de gestion :
+
+* Les statuts doivent être correctement synchronisés avec les actions de prêt, retour, réservation et prolongation.
+
+Résultat :
+
+* L’utilisateur visualise les exemplaires disponibles ou non, avec transparence sur les statuts.
