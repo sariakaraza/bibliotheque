@@ -19,6 +19,10 @@
         <a href="${pageContext.request.contextPath}/prolonger" class="lien-catalogue">
             Prolonger un pret
         </a>
+        |
+        <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
+            Liste des penalises
+        </a>
     </h2>
 
 
@@ -51,6 +55,45 @@
     <button type="submit">Enregistrer le pret</button>
     </form>
 
+    <h2>Liste des adherents</h2>
+    <table border="1" style="border-collapse: collapse; width: 60%;">
+        <tr>
+            <th style="font-size: 18px; padding: 12px;">Numero</th>
+            <th style="font-size: 18px; padding: 12px;">Nom</th>
+            <th style="font-size: 18px; padding: 12px;">Prenom</th>
+            <th style="font-size: 18px; padding: 12px;">Email</th>
+            <th style="font-size: 18px; padding: 12px;">Date de naissance</th>
+        </tr>
+        <c:forEach var="adherant" items="${adherants}">
+            <tr>
+                <td style="font-size: 16px; padding: 10px;">${adherant.idAdherant}</td>
+                <td style="font-size: 16px; padding: 10px;">${adherant.nomAdherant}</td>
+                <td style="font-size: 16px; padding: 10px;">${adherant.prenomAdherant}</td>
+                <td style="font-size: 16px; padding: 10px;">${adherant.email}</td>
+                <td style="font-size: 16px; padding: 10px;">${adherant.dateNaissance}</td>
+            </tr>
+        </c:forEach>
+    </table>
+
+    <br>
+
+    <h2>Liste des exemplaires</h2>
+    <table border="1" style="border-collapse: collapse; width: 60%;">
+        <tr>
+            <th style="font-size: 18px; padding: 12px;">Numero Exemplaire</th>
+            <th style="font-size: 18px; padding: 12px;">Titre du livre</th>
+            <th style="font-size: 18px; padding: 12px;">Auteur</th>
+            <th style="font-size: 18px; padding: 12px;">Annee publication</th>
+        </tr>
+        <c:forEach var="exemplaire" items="${exemplaires}">
+            <tr>
+                <td style="font-size: 16px; padding: 10px;">${exemplaire.idExemplaire}</td>
+                <td style="font-size: 16px; padding: 10px;">${exemplaire.livre.titre}</td>
+                <td style="font-size: 16px; padding: 10px;">${exemplaire.livre.auteur}</td>
+                <td style="font-size: 16px; padding: 10px;">${exemplaire.livre.anneePublication}</td>
+            </tr>
+        </c:forEach>
+    </table>
 
 </body>
 </html>

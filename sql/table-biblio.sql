@@ -111,11 +111,13 @@ CREATE TABLE abonnement(
 
 CREATE TABLE penalite(
    id_penalite INT AUTO_INCREMENT,
-   duree INT,
+   date_debut DATE,
+   date_fin DATE,
    id_adherant INT NOT NULL,
    PRIMARY KEY(id_penalite),
-   FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
+   FOREIGN KEY(id_adherant) REFERENCES adherant(idAdherant)
 );
+
 
 CREATE TABLE pret(
    id_pret INT,

@@ -73,7 +73,7 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
 Prêter un exemplaire d’un livre
 
@@ -336,3 +336,41 @@ Règles de gestion :
 Résultat :
 
 * L’utilisateur visualise les exemplaires disponibles ou non, avec transparence sur les statuts.
+
+
+
+(OK) Titre : 
+Retourner un exemplaire d’un livre
+
+Utilisateur :
+Bibliothécaire
+
+Input :
+- Prêt concerné (sélectionné dans la liste des prêts non encore retournés)
+- Date de retour
+
+Scénario nominal :
+- Le bibliothécaire se connecte.
+- Il accède au menu « Retour ».
+- Il sélectionne un prêt actif dans la liste.
+- Il saisit la date de retour.
+- Le retour est enregistré.
+
+Scénario alternatif :
+- Message d’erreur si :
+  - Le prêt est déjà retourné.
+  - Le prêt sélectionné est invalide.
+  - La date de retour est antérieure à la date de début du prêt.
+
+Règles de gestion :
+- Seuls les prêts non retournés sont affichés.
+- Lors du retour :
+  - Une ligne est insérée dans la table `retour` avec la date de retour.
+  - Le statut de l’exemplaire passe à "disponible".
+- Le prêt ne peut plus être retourné après avoir été marqué comme retourné.
+- Quota +1
+
+Résultat :
+- Le prêt est marqué comme retourné.
+- L’exemplaire devient disponible.
+- L'information est historisée dans la table `retour`.
