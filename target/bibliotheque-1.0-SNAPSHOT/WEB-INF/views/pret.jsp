@@ -19,6 +19,10 @@
         <a href="${pageContext.request.contextPath}/prolonger" class="lien-catalogue">
             Prolonger un pret
         </a>
+        |
+        <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
+            Liste des penalises
+        </a>
     </h2>
 
 

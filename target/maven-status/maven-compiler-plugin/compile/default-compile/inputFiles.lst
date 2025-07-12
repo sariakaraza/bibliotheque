@@ -25,10 +25,12 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/RetourController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/CategorieRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/LivreService.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/PenaliteService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/PenaliteRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/ExemplaireStatut.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/BibliothecaireService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/PretController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/PenaliteController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/RetourService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Abonnement.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/QuotaTypePretId.java
