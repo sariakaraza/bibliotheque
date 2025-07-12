@@ -8,11 +8,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springjpa.entity.Adherant;
 import com.springjpa.entity.ExemplaireStatut;
+import com.springjpa.entity.Penalite;
 import com.springjpa.entity.Pret;
 import com.springjpa.entity.Retour;
 import com.springjpa.entity.StatutExemplaire;
 import com.springjpa.repository.ExemplaireStatutRepository;
+import com.springjpa.repository.PenaliteRepository;
 import com.springjpa.repository.PretRepository;
 import com.springjpa.repository.RetourRepository;
 import com.springjpa.repository.StatutExemplaireRepository;
@@ -32,6 +35,9 @@ public class RetourService {
 
     @Autowired
     private ExemplaireStatutRepository exemplaireStatutRepository;
+
+    @Autowired
+    private PenaliteRepository penaliteRepository;
 
     public List<Pret> listerPretsAvecExemplaireIndisponible() {
         List<Pret> prets = pretRepository.findAllPretsNonRetournes();
@@ -56,6 +62,7 @@ public class RetourService {
         Pret pret = pretRepository.findById(idPret)
             .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
 
+        penaliser(pret, dateRetour);
         // Enregistrer dans la table retour
         Retour retour = new Retour();
         retour.setDateRetour(dateRetour);
@@ -72,6 +79,29 @@ public class RetourService {
         es.setDateStatut(LocalDateTime.now());
 
         exemplaireStatutRepository.save(es);
-}
+    }
+
+    private void penaliser(Pret pret, LocalDateTime dateRetour) {
+        boolean dejaRetourne = retourRepository.existsByPret_IdPret(pret.getIdPret());
+        if (dejaRetourne) {
+            throw new IllegalStateException("Ce prêt a déjà été retourné.");
+        }
+
+        if (dateRetour.isBefore(pret.getDateDebut())) {
+            throw new IllegalStateException("La date de retour est antérieure à la date de début.");
+        }
+
+        if (dateRetour.isAfter(pret.getDateFin())) {
+            Adherant adherant = pret.getAdherant();
+            int dureePenalite = adherant.getProfil().getDureePenalite();
+
+            Penalite penalite = new Penalite();
+            penalite.setAdherant(adherant);
+            penalite.setDateDebut(dateRetour.toLocalDate());
+            penalite.setDateFin(dateRetour.toLocalDate().plusDays(dureePenalite));
+
+            penaliteRepository.save(penalite);
+        }
+    }
 
 }

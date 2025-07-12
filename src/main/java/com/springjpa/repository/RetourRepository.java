@@ -13,4 +13,6 @@ public interface RetourRepository extends JpaRepository<Retour,Integer>{
     @Query("SELECT r.pret.idPret FROM Retour r")
     List<Integer> findAllPretIdsWithRetour();
 
+    boolean existsByPret_IdPret(Integer idPret);
+
 }

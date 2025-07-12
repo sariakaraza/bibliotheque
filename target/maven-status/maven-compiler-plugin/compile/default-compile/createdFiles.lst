@@ -1,6 +1,8 @@
 com/springjpa/controller/AccueilController.class
+com/springjpa/repository/PenaliteRepository.class
 com/springjpa/repository/AdherantRepository.class
 com/springjpa/service/PretService.class
+com/springjpa/entity/Penalite.class
 com/springjpa/entity/Abonnement.class
 com/springjpa/entity/QuotaTypePretId.class
 com/springjpa/controller/LoginController.class
