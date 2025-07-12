@@ -1,6 +1,7 @@
 package com.springjpa.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springjpa.entity.Adherant;
+import com.springjpa.entity.Exemplaire;
+import com.springjpa.repository.*;
 import com.springjpa.service.PretService;
 
 @Controller
@@ -20,8 +24,19 @@ public class PretController {
     @Autowired
     private PretService pretService;
 
+    @Autowired
+    private AdherantRepository adherantRepository;
+
+    @Autowired
+    private ExemplaireRepository exemplaireRepository;
+
     @GetMapping
-    public String afficherFormulairePret() {
+    public String afficherFormulairePret(Model model) {
+        List<Adherant> adherants = adherantRepository.findAll();
+        List<Exemplaire> exemplaires = exemplaireRepository.findAll();
+
+        model.addAttribute("adherants", adherants);
+        model.addAttribute("exemplaires", exemplaires);
         return "pret";  // retourne la page JSP du formulaire prêt
     }
 
@@ -41,6 +56,8 @@ public class PretController {
         }
         return "pret";  // retourne la même page avec message
     }
+
+
 
 
 }

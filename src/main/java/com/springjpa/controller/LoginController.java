@@ -50,7 +50,7 @@ public class LoginController {
         if (bibliothecaire != null) {
             session.setAttribute("userType", "bibliothecaire");
             session.setAttribute("userId", bibliothecaire.getIdAdmin());
-            return "pret";
+            return "redirect:/pret";
         }
 
         Adherant adherant = adherantService.findByEmailAndPassword(email, password);
