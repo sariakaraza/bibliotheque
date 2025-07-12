@@ -58,11 +58,11 @@ public class RetourService {
     
 
     @Transactional
-    public void enregistrerRetour(Integer idPret, LocalDateTime dateRetour) {
+    public boolean enregistrerRetour(Integer idPret, LocalDateTime dateRetour) {
         Pret pret = pretRepository.findById(idPret)
             .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
 
-        penaliser(pret, dateRetour);
+        boolean penalise = penaliser(pret, dateRetour);
         // Enregistrer dans la table retour
         Retour retour = new Retour();
         retour.setDateRetour(dateRetour);
@@ -79,9 +79,11 @@ public class RetourService {
         es.setDateStatut(LocalDateTime.now());
 
         exemplaireStatutRepository.save(es);
+
+        return penalise;
     }
 
-    private void penaliser(Pret pret, LocalDateTime dateRetour) {
+    private boolean penaliser(Pret pret, LocalDateTime dateRetour) {
         boolean dejaRetourne = retourRepository.existsByPret_IdPret(pret.getIdPret());
         if (dejaRetourne) {
             throw new IllegalStateException("Ce prêt a déjà été retourné.");
@@ -101,7 +103,10 @@ public class RetourService {
             penalite.setDateFin(dateRetour.toLocalDate().plusDays(dureePenalite));
 
             penaliteRepository.save(penalite);
+
+            return true;
         }
+        return false;
     }
 
 }

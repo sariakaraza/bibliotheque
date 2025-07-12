@@ -21,8 +21,10 @@ public class RetourController {
 
     @PostMapping("/retour")
     public String enregistrerRetour(@RequestParam("pretId") Integer idPret,
-                                    @RequestParam("dateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRetour) {
-        retourService.enregistrerRetour(idPret, dateRetour);
+                                    @RequestParam("dateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRetour,
+                                    Model model) {
+        boolean penalise = retourService.enregistrerRetour(idPret, dateRetour);
+        model.addAttribute("penalise", penalise);
         return "retour";
     }
 

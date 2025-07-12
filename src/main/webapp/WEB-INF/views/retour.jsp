@@ -9,6 +9,10 @@
 <body>
 
 <h1>Retourner un Pret</h1>
+<c:if test="${penalise}">
+    <p style="color: red;">Retard tardif, cet adhérent est pénalisé.</p>
+</c:if>
+
 
 <form method="post" action="retour">
     <label for="pretId">Choisir un pret :</label>
