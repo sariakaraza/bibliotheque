@@ -41,12 +41,16 @@ public class PretService {
     @Autowired
     private StatutExemplaireRepository statutExemplaireRepository;
     
+    @Autowired
+    private PenaliteRepository penaliteRepository;
+
     public void effectuerPret(Integer idAdherant, Integer idExemplaire, Integer idTypePret, LocalDateTime inputDateDebut) {
         Adherant adherant = getAdherantOrThrow(idAdherant);
         Exemplaire exemplaire = getExemplaireOrThrow(idExemplaire);
     
         LocalDateTime datePret = inputDateDebut != null ? inputDateDebut : LocalDateTime.now();
     
+        verifierPenaliteAdherant(adherant, datePret.toLocalDate());
         verifierAbonnementActif(adherant, datePret);
         verifierRestrictionAge(adherant, exemplaire);
     
@@ -154,5 +158,13 @@ public class PretService {
             throw new IllegalStateException("Quota de prêt atteint. Vous avez déjà " + nombrePretsActifs + " prêts actifs.");
         }
     }
+
+    private void verifierPenaliteAdherant(Adherant adherant, LocalDate datePret) {
+        boolean penalise = penaliteRepository.isAdherantPenalise(adherant.getIdAdherant(), datePret);
+        if (penalise) {
+            throw new IllegalStateException("L'adhérent est pénalisé à cette date et ne peut pas emprunter.");
+        }
+    }
+    
     
 }
