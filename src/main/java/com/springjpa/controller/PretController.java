@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springjpa.entity.Adherant;
 import com.springjpa.entity.Exemplaire;
+import com.springjpa.entity.Reservation;
 import com.springjpa.repository.*;
 import com.springjpa.service.PretService;
 
@@ -30,15 +31,33 @@ public class PretController {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
+    // @GetMapping
+    // public String afficherFormulairePret(Model model) {
+    //     List<Adherant> adherants = adherantRepository.findAll();
+    //     List<Exemplaire> exemplaires = exemplaireRepository.findAll();
+
+    //     model.addAttribute("adherants", adherants);
+    //     model.addAttribute("exemplaires", exemplaires);
+    //     return "pret";  // retourne la page JSP du formulaire prêt
+    // }
+
+    @Autowired
+    private ReservationRepository reservationRepository;
+
     @GetMapping
     public String afficherFormulairePret(Model model) {
         List<Adherant> adherants = adherantRepository.findAll();
         List<Exemplaire> exemplaires = exemplaireRepository.findAll();
 
+        List<Reservation> reservationsValidees = reservationRepository.findByStatut("valide");
+
         model.addAttribute("adherants", adherants);
         model.addAttribute("exemplaires", exemplaires);
-        return "pret";  // retourne la page JSP du formulaire prêt
+        model.addAttribute("reservationsValidees", reservationsValidees);
+
+        return "pret";
     }
+
 
     @PostMapping("/save")
     public String enregistrerPret(
@@ -57,6 +76,30 @@ public class PretController {
         return "pret";  // retourne la même page avec message
     }
 
+    @PostMapping("/fromReservation")
+    public String effectuerPretDepuisReservation(
+            @RequestParam Integer idAdherant,
+            @RequestParam Integer idExemplaire,
+            @RequestParam Integer idTypePret,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateDebut,
+            @RequestParam Integer idReservation,
+            Model model) {
+        try {
+            pretService.effectuerPret(idAdherant, idExemplaire, idTypePret, dateDebut);
+            
+            // Optionnel : changer le statut de la réservation en "utilisée" ou "traitée"
+            reservationRepository.findById(idReservation).ifPresent(r -> {
+                r.setStatut("traitée");
+                reservationRepository.save(r);
+            });
+
+            model.addAttribute("successMessage", "Prêt effectué à partir de la réservation.");
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return afficherFormulairePret(model); // Recharge la même page avec les données à jour
+    }
 
 
 
