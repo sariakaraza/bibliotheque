@@ -228,9 +228,9 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
-Accepter ou refuser une demande de prolongement
+Accepter une demande de prolongement
 
 Utilisateur :
 
@@ -247,10 +247,6 @@ Scénario nominal :
 
   * Ajoute X jours à la date de retour (selon règles).
   * Met à jour le statut.
-* Ou clique sur "Refuser" :
-
-  * Le prêt reste inchangé.
-  * Statut mis à "refusé".
 
 Scénario alternatif :
 
@@ -264,7 +260,6 @@ Règles de gestion :
 Résultat :
 
 * Statut du prolongement mis à jour.
-* Historique conservé.
 
 ---
 
