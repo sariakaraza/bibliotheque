@@ -117,7 +117,7 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
 Réserver un exemplaire (adhérent)
 
@@ -153,7 +153,7 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
 Accepter ou refuser une réservation (bibliothécaire)
 
@@ -168,12 +168,11 @@ Identifiant de réservation
 Scénario nominal :
 
 * Le bibliothécaire accède à la liste des réservations.
-* Il clique sur "Accepter" ou "Refuser" :
+* Il clique sur "Accepter" :
 
   * Met à jour la réservation :
 
-    * Statut = accepté ou refusé
-    * Date de réponse = aujourd’hui
+    * Statut = accepté ou en attente ou traitee
 
 Scénario alternatif :
 
@@ -187,12 +186,11 @@ Règles de gestion :
 Résultat :
 
 * Statut mis à jour.
-* Historique des décisions conservé.
 
 ---
 
 
-Titre :
+(OK)Titre :
 
 Prolonger un prêt (adhérent)
 
@@ -208,7 +206,7 @@ Scénario nominal :
 
 * L’adhérent accède à la liste de ses prêts.
 * Il clique sur "Prolonger" pour un prêt éligible.
-* Une demande de prolongation est créée avec date du jour.
+* Une demande de prolongation est créée avec date fin de pret.
 
 Scénario alternatif :
 
@@ -230,9 +228,9 @@ Résultat :
 ---
 
 
-Titre :
+(OK) Titre :
 
-Accepter ou refuser une demande de prolongement
+Accepter une demande de prolongement
 
 Utilisateur :
 
@@ -249,10 +247,6 @@ Scénario nominal :
 
   * Ajoute X jours à la date de retour (selon règles).
   * Met à jour le statut.
-* Ou clique sur "Refuser" :
-
-  * Le prêt reste inchangé.
-  * Statut mis à "refusé".
 
 Scénario alternatif :
 
@@ -266,7 +260,6 @@ Règles de gestion :
 Résultat :
 
 * Statut du prolongement mis à jour.
-* Historique conservé.
 
 ---
 

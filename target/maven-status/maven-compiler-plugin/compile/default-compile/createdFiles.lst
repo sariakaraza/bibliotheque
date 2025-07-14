@@ -25,6 +25,7 @@ com/springjpa/entity/QuotaTypePret.class
 com/springjpa/entity/ExemplaireStatut.class
 com/springjpa/controller/BibliothecaireController.class
 com/springjpa/repository/TypePretRepository.class
+com/springjpa/entity/Prolongement.class
 com/springjpa/service/AbonnementService.class
 com/springjpa/service/PretService.class
 com/springjpa/entity/Abonnement.class
@@ -35,6 +36,7 @@ com/springjpa/repository/CategorieRepository.class
 com/springjpa/service/RetourService.class
 com/springjpa/entity/DureePret.class
 com/springjpa/repository/ReservationRepository.class
+com/springjpa/repository/ProlongementRepository.class
 com/springjpa/repository/LivreRepository.class
 com/springjpa/controller/AdherantController.class
 com/springjpa/entity/Reservation.class
@@ -47,3 +49,4 @@ com/springjpa/repository/PretRepository.class
 com/springjpa/repository/AbonnementRepository.class
 com/springjpa/entity/Categorie.class
 com/springjpa/entity/TypePret.class
+com/springjpa/controller/ProlongementController.class

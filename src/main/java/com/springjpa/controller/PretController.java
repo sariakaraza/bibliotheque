@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springjpa.entity.Adherant;
 import com.springjpa.entity.Exemplaire;
+import com.springjpa.entity.Pret;
+import com.springjpa.entity.Prolongement;
 import com.springjpa.entity.Reservation;
 import com.springjpa.repository.*;
 import com.springjpa.service.PretService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/pret")
@@ -27,22 +32,27 @@ public class PretController {
 
     @Autowired
     private AdherantRepository adherantRepository;
-
+    
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
-    // @GetMapping
-    // public String afficherFormulairePret(Model model) {
-    //     List<Adherant> adherants = adherantRepository.findAll();
-    //     List<Exemplaire> exemplaires = exemplaireRepository.findAll();
-
-    //     model.addAttribute("adherants", adherants);
-    //     model.addAttribute("exemplaires", exemplaires);
-    //     return "pret";  // retourne la page JSP du formulaire prêt
-    // }
-
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Autowired
+    private ProlongementRepository prolongementRepository;
+
+
+    @GetMapping("/mes-prets")
+    public String afficherPretsAdherant(Model model, HttpSession session) {
+        Integer idAdherant = (Integer) session.getAttribute("userId");
+
+        List<Pret> prets = pretService.listerPretsParAdherant(idAdherant);
+        model.addAttribute("mesPrets", prets);
+
+        return "mes-prets"; // 👉 page JSP à créer
+    }
+
 
     @GetMapping
     public String afficherFormulairePret(Model model) {
@@ -50,10 +60,13 @@ public class PretController {
         List<Exemplaire> exemplaires = exemplaireRepository.findAll();
 
         List<Reservation> reservationsValidees = reservationRepository.findByStatut("valide");
+        List<Prolongement> prolongementsValides = prolongementRepository.findByStatut("valide");
 
         model.addAttribute("adherants", adherants);
         model.addAttribute("exemplaires", exemplaires);
         model.addAttribute("reservationsValidees", reservationsValidees);
+        model.addAttribute("prolongementsValides", prolongementsValides);
+
 
         return "pret";
     }
@@ -102,5 +115,40 @@ public class PretController {
     }
 
 
+    @PostMapping("/prolonger")
+    public String prolongerPret(@RequestParam Integer idPret, RedirectAttributes redirectAttributes) {
+        try {
+            pretService.demanderProlongement(idPret);
+            redirectAttributes.addFlashAttribute("successMessage", "Demande de prolongement envoyée !");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Erreur : " + e.getMessage());
+        }
+        return "redirect:/pret/mes-prets";
+    }
+
+    @PostMapping("/fromProlongement")
+    public String effectuerPretDepuisProlongement(
+            @RequestParam Integer idAdherant,
+            @RequestParam Integer idExemplaire,
+            @RequestParam Integer idTypePret,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateDebut,
+            @RequestParam Integer idProlongement,
+            Model model) {
+        try {
+            pretService.effectuerPret(idAdherant, idExemplaire, idTypePret, dateDebut);
+
+            // Marquer le prolongement comme "traité"
+            prolongementRepository.findById(idProlongement).ifPresent(p -> {
+                p.setStatut("traité");
+                prolongementRepository.save(p);
+            });
+
+            model.addAttribute("successMessage", "Prêt effectué à partir du prolongement.");
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erreur : " + e.getMessage());
+        }
+
+        return afficherFormulairePret(model);
+    }
 
 }

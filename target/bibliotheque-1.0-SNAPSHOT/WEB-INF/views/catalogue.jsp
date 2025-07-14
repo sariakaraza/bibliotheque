@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>Catalogue des Livres</h1>
+    <c:if test="${sessionScope.userType == 'adherant'}">
+    <a href="${pageContext.request.contextPath}/pret/mes-prets" class="lien-catalogue"><h1> Mes prets</h1></a>
+    </c:if>
     <c:if test="${not empty errorMessage}">
         <p style="color: red;">${errorMessage}</p>
     </c:if>

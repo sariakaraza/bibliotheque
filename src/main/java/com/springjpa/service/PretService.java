@@ -3,6 +3,7 @@ package com.springjpa.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,17 @@ public class PretService {
     
     @Autowired
     private ExemplaireStatutRepository exemplaireStatutRepository;
-
+    
     @Autowired
     private StatutExemplaireRepository statutExemplaireRepository;
     
     @Autowired
     private PenaliteRepository penaliteRepository;
+    
 
+    @Autowired
+    private ProlongementRepository prolongementRepository;
+    
     public void effectuerPret(Integer idAdherant, Integer idExemplaire, Integer idTypePret, LocalDateTime inputDateDebut) {
         Adherant adherant = getAdherantOrThrow(idAdherant);
         Exemplaire exemplaire = getExemplaireOrThrow(idExemplaire);
@@ -165,6 +170,21 @@ public class PretService {
             throw new IllegalStateException("L'adhérent est pénalisé à cette date et ne peut pas emprunter.");
         }
     }
-    
-    
+
+    public List<Pret> listerPretsParAdherant(Integer idAdherant) {
+        return pretRepository.findByAdherant_IdAdherant(idAdherant);
+    }
+
+    public void demanderProlongement(Integer idPret) {
+        Pret pret = pretRepository.findById(idPret)
+            .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
+
+        Prolongement prolongement = new Prolongement();
+        prolongement.setPret(pret);
+        prolongement.setDateProlongement(pret.getDateFin());
+        prolongement.setStatut("en attente");
+
+        prolongementRepository.save(prolongement);
+    }
+
 }
