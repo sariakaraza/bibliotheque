@@ -49,3 +49,4 @@ com/springjpa/repository/PretRepository.class
 com/springjpa/repository/AbonnementRepository.class
 com/springjpa/entity/Categorie.class
 com/springjpa/entity/TypePret.class
+com/springjpa/controller/ProlongementController.class

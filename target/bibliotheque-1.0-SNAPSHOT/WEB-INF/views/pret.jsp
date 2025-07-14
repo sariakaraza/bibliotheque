@@ -16,8 +16,8 @@
             Retourner les prets
         </a>
         |
-        <a href="${pageContext.request.contextPath}/prolonger" class="lien-catalogue">
-            Prolonger un pret
+        <a href="${pageContext.request.contextPath}/admin/prolongements"" class="lien-catalogue">
+            Voir la liste des prolongements
         </a>
         |
         <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
