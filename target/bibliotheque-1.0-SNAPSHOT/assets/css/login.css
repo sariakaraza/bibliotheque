@@ -78,7 +78,7 @@ h1::after {
 /* Conteneur du formulaire */
 form {
     background: white;
-    padding: 3rem;
+    /* padding: 3rem; */
     border-radius: 15px;
     box-shadow: var(--shadow);
     width: 100%;
@@ -198,6 +198,85 @@ button[type="submit"]::before {
 
 button[type="submit"]:hover::before {
     left: 100%;
+}
+/* Bouton Réserver - Version minimaliste et compacte */
+.btn-reserver {
+    background: linear-gradient(135deg, var(--primary-color), var(--background-dark));
+    color: white;
+    border: none;
+    padding: 8px 16px;              /* Réduit la taille */
+    font-size: 0.85rem;             /* Texte plus petit */
+    font-weight: 500;               /* Moins épais */
+    border-radius: 6px;             /* Coins légèrement arrondis */
+    cursor: pointer;
+    transition: all 0.2s ease;     /* Transition plus rapide */
+    text-transform: none;           /* Pas de majuscules */
+    letter-spacing: 0.3px;          /* Espacement subtil */
+    box-shadow: 0 2px 4px rgba(44, 62, 80, 0.2);  /* Ombre plus discrète */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;                /* Largeur minimum */
+    white-space: nowrap;            /* Évite le retour à la ligne */
+}
+
+/* Effet au survol */
+.btn-reserver:hover {
+    background: linear-gradient(135deg, var(--background-dark), var(--primary-color));
+    transform: translateY(-1px);    /* Mouvement plus subtil */
+    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.25);
+}
+
+/* Effet au clic */
+.btn-reserver:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(44, 62, 80, 0.2);
+}
+
+/* Effet de brillance plus subtil */
+.btn-reserver::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.4s;
+}
+
+.btn-reserver:hover::before {
+    left: 100%;
+}
+
+/* État focus pour l'accessibilité */
+.btn-reserver:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
+}
+
+/* Version encore plus compacte (optionnelle) */
+.btn-reserver.compact {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 60px;
+}
+
+/* Responsive - ajustements pour mobile */
+@media (max-width: 768px) {
+    .btn-reserver {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+        min-width: 65px;
+    }
+}
+
+/* Style pour les formulaires inline (comme dans votre code) */
+form[style*="display:inline"] .btn-reserver {
+    margin-left: 8px;               /* Espacement avec le texte précédent */
+    vertical-align: middle;         /* Alignement avec le texte */
 }
 
 .lien-catalogue {

@@ -169,3 +169,7 @@ VALUES
   (5, 1, NOW()),  -- disponible
   (3, 3, NOW()),  -- indisponible
   (4, 2, NOW());  -- réservé
+
+INSERT INTO statut_reservation (nom_statut) VALUES 
+('en attente'),
+('valide');

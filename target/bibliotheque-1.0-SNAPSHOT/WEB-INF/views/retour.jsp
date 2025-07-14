@@ -10,7 +10,7 @@
 
 <h1>Retourner un Pret</h1>
 <c:if test="${penalise}">
-    <p style="color: red;">Retard tardif, cet adhérent est pénalisé.</p>
+    <p style="color: red;">Retard tardif, cet adherent est penalise.</p>
 </c:if>
 
 

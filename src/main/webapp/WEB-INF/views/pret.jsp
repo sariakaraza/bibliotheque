@@ -11,26 +11,21 @@
         <a href="${pageContext.request.contextPath}/catalogue" class="lien-catalogue">
             Voir la liste des livres
         </a>
-<!-- <<<<<<< feature/listLivres
-        <a href="${pageContext.request.contextPath}/retour" class="lien-catalogue">
-            Retourner les prets
-        </a>
-        <a href="${pageContext.request.contextPath}/list-prets" class="lien-catalogue">
-            Voir la liste des prets
-        </a>
-======= -->
         |
         <a href="${pageContext.request.contextPath}/retour" class="lien-catalogue">
             Retourner les prets
         </a>
         |
-<!-- >>>>>>> main -->
         <a href="${pageContext.request.contextPath}/prolonger" class="lien-catalogue">
             Prolonger un pret
         </a>
         |
         <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
             Liste des penalises
+        </a>
+        |
+        <a href="${pageContext.request.contextPath}/reservation" class="lien-catalogue">
+            Voir la liste des reservations
         </a>
     </h2>
 
@@ -54,11 +49,7 @@
 
     <label for="idTypePret">Type de pret :</label>
     <select name="idTypePret" id="idTypePret" required>
-<!-- <<<<<<< feature/listLivres
-        <option value="1">À domicile</option>
-======= -->
         <option value="1">A domicile</option>
-<!-- >>>>>>> main -->
         <option value="2">Sur place</option>
     </select><br><br>
 
