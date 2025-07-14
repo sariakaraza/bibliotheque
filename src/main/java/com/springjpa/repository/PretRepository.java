@@ -26,5 +26,7 @@ public interface PretRepository extends JpaRepository<Pret, Integer> {
     @Query("SELECT p FROM Pret p WHERE p.idPret NOT IN (SELECT r.pret.idPret FROM Retour r)")
     List<Pret> findAllPretsNonRetournes();
                                       
-                                    
+
+    List<Pret> findByAdherant_IdAdherant(Integer idAdherant); 
+                                
 }
