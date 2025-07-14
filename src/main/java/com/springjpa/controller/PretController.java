@@ -73,7 +73,7 @@ public class PretController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        return "pret";  // retourne la même page avec message
+        return "pret";  
     }
 
     @PostMapping("/fromReservation")
