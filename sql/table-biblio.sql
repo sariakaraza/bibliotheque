@@ -91,11 +91,9 @@ CREATE TABLE adherant(
 CREATE TABLE reservation(
    id_reservation INT,
    date_de_reservation DATETIME,
-   id_admin INT NOT NULL,
    id_exemplaire INT NOT NULL,
    id_adherant INT NOT NULL,
    PRIMARY KEY(id_reservation),
-   FOREIGN KEY(id_admin) REFERENCES admin(id_admin),
    FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
    FOREIGN KEY(id_adherant) REFERENCES adherant(id_adherant)
 );

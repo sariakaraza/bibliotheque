@@ -23,6 +23,10 @@
         <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
             Liste des penalises
         </a>
+        |
+        <a href="${pageContext.request.contextPath}/reservation" class="lien-catalogue">
+            Voir la liste des reservations
+        </a>
     </h2>
 
 
@@ -54,6 +58,37 @@
 
     <button type="submit">Enregistrer le pret</button>
     </form>
+
+    <h2>Faire le pret d'une reservation validee</h2>
+
+    <table border="1" style="border-collapse: collapse; width: 80%;">
+        <tr>
+            <th>Numero</th>
+            <th>Adherent</th>
+            <th>Exemplaire</th>
+            <th>Date de reservation</th>
+            <th>Action</th>
+        </tr>
+        <c:forEach var="r" items="${reservationsValidees}">
+            <tr>
+                <td>${r.idReservation}</td>
+                <td>${r.adherant.nomAdherant} ${r.adherant.prenomAdherant}</td>
+                <td>${r.exemplaire.idExemplaire} ${r.exemplaire.livre.titre}</td>
+                <td>${r.dateDeReservation}</td>
+                <td>
+                    <form method="post" action="${pageContext.request.contextPath}/pret/fromReservation">
+                        <input type="hidden" name="idAdherant" value="${r.adherant.idAdherant}" />
+                        <input type="hidden" name="idExemplaire" value="${r.exemplaire.idExemplaire}" />
+                        <input type="hidden" name="dateDebut" value="${r.dateDeReservation}" />
+                        <input type="hidden" name="idReservation" value="${r.idReservation}" />
+                        <input type="hidden" name="idTypePret" value="1" /> <!-- à domicile -->
+                        <button type="submit">Faire le pret</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
 
     <h2>Liste des adherents</h2>
     <table border="1" style="border-collapse: collapse; width: 60%;">
