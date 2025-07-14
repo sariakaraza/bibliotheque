@@ -59,6 +59,36 @@
     <button type="submit">Enregistrer le pret</button>
     </form>
 
+    <h2>Faire le pret d'un prolongement valide</h2>
+
+    <table border="1" style="border-collapse: collapse; width: 80%;">
+        <tr>
+            <th>Numero</th>
+            <th>Adhérent</th>
+            <th>Exemplaire</th>
+            <th>Date du prolongement</th>
+            <th>Action</th>
+        </tr>
+        <c:forEach var="p" items="${prolongementsValides}">
+            <tr>
+                <td>${p.idProlongement}</td>
+                <td>${p.pret.adherant.nomAdherant} ${p.pret.adherant.prenomAdherant}</td>
+                <td>${p.pret.exemplaire.idExemplaire} ${p.pret.exemplaire.livre.titre}</td>
+                <td>${p.dateProlongement}</td>
+                <td>
+                    <form method="post" action="${pageContext.request.contextPath}/pret/fromProlongement">
+                        <input type="hidden" name="idAdherant" value="${p.pret.adherant.idAdherant}" />
+                        <input type="hidden" name="idExemplaire" value="${p.pret.exemplaire.idExemplaire}" />
+                        <input type="hidden" name="dateDebut" value="${p.dateProlongement}" />
+                        <input type="hidden" name="idProlongement" value="${p.idProlongement}" />
+                        <input type="hidden" name="idTypePret" value="1" />
+                        <button type="submit">Faire le pret</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+
     <h2>Faire le pret d'une reservation validee</h2>
 
     <table border="1" style="border-collapse: collapse; width: 80%;">

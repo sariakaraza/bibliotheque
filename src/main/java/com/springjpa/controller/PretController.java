@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.springjpa.entity.Adherant;
 import com.springjpa.entity.Exemplaire;
 import com.springjpa.entity.Pret;
+import com.springjpa.entity.Prolongement;
 import com.springjpa.entity.Reservation;
 import com.springjpa.repository.*;
 import com.springjpa.service.PretService;
@@ -38,6 +39,10 @@ public class PretController {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private ProlongementRepository prolongementRepository;
+
+
     @GetMapping("/mes-prets")
     public String afficherPretsAdherant(Model model, HttpSession session) {
         Integer idAdherant = (Integer) session.getAttribute("userId");
@@ -55,10 +60,13 @@ public class PretController {
         List<Exemplaire> exemplaires = exemplaireRepository.findAll();
 
         List<Reservation> reservationsValidees = reservationRepository.findByStatut("valide");
+        List<Prolongement> prolongementsValides = prolongementRepository.findByStatut("valide");
 
         model.addAttribute("adherants", adherants);
         model.addAttribute("exemplaires", exemplaires);
         model.addAttribute("reservationsValidees", reservationsValidees);
+        model.addAttribute("prolongementsValides", prolongementsValides);
+
 
         return "pret";
     }
@@ -116,6 +124,31 @@ public class PretController {
             redirectAttributes.addFlashAttribute("errorMessage", "Erreur : " + e.getMessage());
         }
         return "redirect:/pret/mes-prets";
+    }
+
+    @PostMapping("/fromProlongement")
+    public String effectuerPretDepuisProlongement(
+            @RequestParam Integer idAdherant,
+            @RequestParam Integer idExemplaire,
+            @RequestParam Integer idTypePret,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateDebut,
+            @RequestParam Integer idProlongement,
+            Model model) {
+        try {
+            pretService.effectuerPret(idAdherant, idExemplaire, idTypePret, dateDebut);
+
+            // Marquer le prolongement comme "traité"
+            prolongementRepository.findById(idProlongement).ifPresent(p -> {
+                p.setStatut("traité");
+                prolongementRepository.save(p);
+            });
+
+            model.addAttribute("successMessage", "Prêt effectué à partir du prolongement.");
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erreur : " + e.getMessage());
+        }
+
+        return afficherFormulairePret(model);
     }
 
 }
