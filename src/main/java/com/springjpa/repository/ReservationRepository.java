@@ -7,5 +7,6 @@ import com.springjpa.entity.Reservation;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
+    
 }
 

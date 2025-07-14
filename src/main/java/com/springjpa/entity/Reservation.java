@@ -1,7 +1,6 @@
 package com.springjpa.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +19,11 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "id_adherant")
     private Adherant adherant;
+
+    @Column(name = "statut", nullable = false)
+    private String statut = "en attente";
+
+    // === Getters & Setters ===
 
     public Integer getIdReservation() {
         return idReservation;
@@ -53,7 +57,11 @@ public class Reservation {
         this.adherant = adherant;
     }
 
-    
+    public String getStatut() {
+        return statut;
+    }
 
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
 }
-

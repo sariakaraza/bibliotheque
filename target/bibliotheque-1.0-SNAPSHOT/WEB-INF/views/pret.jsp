@@ -23,6 +23,10 @@
         <a href="${pageContext.request.contextPath}/penalites" class="lien-catalogue">
             Liste des penalises
         </a>
+        |
+        <a href="${pageContext.request.contextPath}/reservation" class="lien-catalogue">
+            Voir la liste des reservations
+        </a>
     </h2>
 
 
