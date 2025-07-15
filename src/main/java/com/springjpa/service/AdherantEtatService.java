@@ -1,5 +1,6 @@
 package com.springjpa.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,19 @@ public class AdherantEtatService {
                 return p;
             }).toList();
 
+        LocalDateTime now = LocalDateTime.now();
+        // Vérifier s’il est abonné aujourd’hui
+        boolean estAbonneAjd = abonnementRepository.existsByAdherant_IdAdherantAndDateDebutBeforeAndDateFinAfter(
+            idAdherant, now, now);
+
+        // Vérifier s’il est pénalisé aujourd’hui
+        boolean estPenaliseAjd = penaliteRepository.isAdherantPenalise(idAdherant, now.toLocalDate());
+
         dto.setAbonnements(abonnements);
         dto.setPenalites(penalites);
         dto.setQuotaPret(adherant.getProfil().getQuotaPret());
+        dto.setEstAbonneAjd(estAbonneAjd);
+        dto.setEstPenaliseAjd(estPenaliseAjd);
         return dto;
     }
 }

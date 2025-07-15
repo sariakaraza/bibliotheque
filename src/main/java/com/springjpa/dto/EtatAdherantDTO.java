@@ -9,6 +9,11 @@ public class EtatAdherantDTO {
     private List<PeriodeDTO> abonnements;
     private List<PeriodeDTO> penalites;
     private Integer quotaPret;
+
+    private boolean estAbonneAjd;
+    private boolean estPenaliseAjd;
+
+    
     public Integer getId() {
         return id;
     }
@@ -44,6 +49,18 @@ public class EtatAdherantDTO {
     }
     public void setQuotaPret(Integer quotaPret) {
         this.quotaPret = quotaPret;
+    }
+    public boolean isEstAbonneAjd() {
+        return estAbonneAjd;
+    }
+    public void setEstAbonneAjd(boolean estAbonneAjd) {
+        this.estAbonneAjd = estAbonneAjd;
+    }
+    public boolean isEstPenaliseAjd() {
+        return estPenaliseAjd;
+    }
+    public void setEstPenaliseAjd(boolean estPenaliseAjd) {
+        this.estPenaliseAjd = estPenaliseAjd;
     }
   
 
