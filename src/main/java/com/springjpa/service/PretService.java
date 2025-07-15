@@ -48,7 +48,13 @@ public class PretService {
 
     @Autowired
     private ProlongementRepository prolongementRepository;
-    
+
+    @Autowired
+    private JourFerieRepository jourFerieRepository;
+
+    @Autowired
+    private WeekendRepository weekendRepository;
+
     public void effectuerPret(Integer idAdherant, Integer idExemplaire, Integer idTypePret, LocalDateTime inputDateDebut) {
         Adherant adherant = getAdherantOrThrow(idAdherant);
         Exemplaire exemplaire = getExemplaireOrThrow(idExemplaire);
@@ -77,8 +83,12 @@ public class PretService {
         if ("Sur place".equalsIgnoreCase(typePret.getType())) {
             pret.setDateFin(datePret);
         } else {
+            // int duree = getDureePretPourProfil(adherant.getProfil());
+            // pret.setDateFin(datePret.plusDays(duree));
             int duree = getDureePretPourProfil(adherant.getProfil());
-            pret.setDateFin(datePret.plusDays(duree));
+            LocalDateTime dateFinPrevue = datePret.plusDays(duree);
+            LocalDateTime dateFinAjustee = ajusterSiNonOuvrable(dateFinPrevue);
+            pret.setDateFin(dateFinAjustee);
         }
 
         // Vérifier si l’exemplaire est actuellement indisponible
@@ -187,4 +197,34 @@ public class PretService {
         prolongementRepository.save(prolongement);
     }
 
+    public LocalDateTime ajusterSiNonOuvrable(LocalDateTime dateInitiale) {
+        int decalageWeekend = Optional.ofNullable(weekendRepository.findPremier())
+                                      .map(Weekend::getDecalage)
+                                      .orElse(1); // Par défaut +1 si absent
+    
+        LocalDateTime date = dateInitiale;
+    
+        while (estWeekend(date.toLocalDate()) || estFerie(date.toLocalDate())) {
+            if (estWeekend(date.toLocalDate())) {
+                date = date.plusDays(decalageWeekend);
+            } else if (estFerie(date.toLocalDate())) {
+                // Récupérer le décalage spécifique du jour férié
+                int decalageFerie = jourFerieRepository.findByDate(date.toLocalDate())
+                    .map(JourFerie::getDecalage)
+                    .orElse(1);
+                date = date.plusDays(decalageFerie);
+            }
+        }
+    
+        return date;
+    }
+    
+    
+    private boolean estWeekend(LocalDate date) {
+        return date.getDayOfWeek().getValue() >= 6; // 6 = samedi, 7 = dimanche
+    }
+    
+    private boolean estFerie(LocalDate date) {
+        return jourFerieRepository.existsByDate(date);
+    }
 }

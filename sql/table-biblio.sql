@@ -196,3 +196,15 @@ CREATE TABLE Asso_23_1(
    FOREIGN KEY(id_exemplaire) REFERENCES exemplaire(id_exemplaire),
    FOREIGN KEY(id_statut_exemplaire) REFERENCES statut_exemplaire(id_statut_exemplaire)
 );
+
+CREATE TABLE jour_ferie (
+    id_jour_ferie INT AUTO_INCREMENT PRIMARY KEY,
+    date_jour_ferie DATE NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    decalage INT DEFAULT 1
+);
+
+CREATE TABLE weekend (
+    id_weekend INT AUTO_INCREMENT PRIMARY KEY,
+    decalage INT NOT NULL
+);
