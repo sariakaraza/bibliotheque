@@ -1,8 +1,10 @@
 com/springjpa/controller/AccueilController.class
 com/springjpa/repository/PenaliteRepository.class
 com/springjpa/repository/AdherantRepository.class
+com/springjpa/dto/EtatAdherantDTO.class
 com/springjpa/entity/Penalite.class
 com/springjpa/entity/QuotaTypePretId.class
+com/springjpa/controller/ApiAdherantController.class
 com/springjpa/repository/RetourRepository.class
 com/springjpa/entity/StatutExemplaire.class
 com/springjpa/controller/ReservationController.class
@@ -18,6 +20,7 @@ com/springjpa/dto/LivreAvecExemplairesDTO.class
 com/springjpa/repository/StatutExemplaireRepository.class
 com/springjpa/entity/Livre.class
 com/springjpa/repository/ExemplaireRepository.class
+com/springjpa/service/AdherantEtatService.class
 com/springjpa/service/ReservationService.class
 com/springjpa/service/LivreService.class
 com/springjpa/entity/Pret.class
@@ -38,6 +41,7 @@ com/springjpa/repository/CategorieRepository.class
 com/springjpa/service/RetourService.class
 com/springjpa/entity/DureePret.class
 com/springjpa/repository/ReservationRepository.class
+com/springjpa/dto/PeriodeDTO.class
 com/springjpa/repository/ProlongementRepository.class
 com/springjpa/repository/LivreRepository.class
 com/springjpa/controller/AdherantController.class

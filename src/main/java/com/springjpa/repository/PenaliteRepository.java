@@ -24,4 +24,6 @@ public interface PenaliteRepository extends JpaRepository<Penalite, Integer>{
     @Query("SELECT p FROM Penalite p JOIN FETCH p.adherant")
     List<Penalite> findAllWithAdherant();
 
+    List<Penalite> findByAdherant_IdAdherant(Integer idAdherant);
+
 }

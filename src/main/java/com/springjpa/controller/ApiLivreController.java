@@ -33,7 +33,6 @@ public class ApiLivreController {
 
         Livre livre = optLivre.get();
 
-        // Pour chaque exemplaire : on récupère le dernier statut
         for (Exemplaire ex : livre.getExemplaires()) {
             exemplaireStatutRepository.findDernierStatut(ex.getIdExemplaire())
                 .ifPresentOrElse(
