@@ -17,6 +17,8 @@ public class AdherantEtatService {
     @Autowired private AdherantRepository adherantRepository;
     @Autowired private AbonnementRepository abonnementRepository;
     @Autowired private PenaliteRepository penaliteRepository;
+    @Autowired private TypePretRepository typePretRepository;
+    @Autowired private PretRepository pretRepository;
 
     public EtatAdherantDTO getInfosAdherant(Integer idAdherant) {
         Adherant adherant = adherantRepository.findById(idAdherant)
@@ -57,11 +59,21 @@ public class AdherantEtatService {
         // Vérifier s’il est pénalisé aujourd’hui
         boolean estPenaliseAjd = penaliteRepository.isAdherantPenalise(idAdherant, now.toLocalDate());
 
+        int quotaMax = adherant.getProfil().getQuotaPret();
+        TypePret typeSurPlace = typePretRepository.findByType("Sur place")
+            .orElseThrow(() -> new IllegalStateException("Type 'Sur place' introuvable"));
+
+        long nombrePretsActifs = pretRepository.countPretsActifsHorsSurPlace(
+            adherant.getIdAdherant(), LocalDateTime.now(), typeSurPlace
+        );
+        int quotaRestantAjd = (int) Math.max(0, quotaMax - nombrePretsActifs);
+
         dto.setAbonnements(abonnements);
         dto.setPenalites(penalites);
         dto.setQuotaPret(adherant.getProfil().getQuotaPret());
         dto.setEstAbonneAjd(estAbonneAjd);
         dto.setEstPenaliseAjd(estPenaliseAjd);
+        dto.setQuotaRestantAjd(quotaRestantAjd);
         return dto;
     }
 }

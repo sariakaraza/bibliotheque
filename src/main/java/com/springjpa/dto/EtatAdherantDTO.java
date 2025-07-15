@@ -13,6 +13,7 @@ public class EtatAdherantDTO {
     private boolean estAbonneAjd;
     private boolean estPenaliseAjd;
 
+    private Integer quotaRestantAjd;
     
     public Integer getId() {
         return id;
@@ -61,6 +62,12 @@ public class EtatAdherantDTO {
     }
     public void setEstPenaliseAjd(boolean estPenaliseAjd) {
         this.estPenaliseAjd = estPenaliseAjd;
+    }
+    public Integer getQuotaRestantAjd() {
+        return quotaRestantAjd;
+    }
+    public void setQuotaRestantAjd(Integer quotaRestantAjd) {
+        this.quotaRestantAjd = quotaRestantAjd;
     }
   
 
