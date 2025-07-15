@@ -19,5 +19,20 @@ public interface ExemplaireStatutRepository extends JpaRepository<ExemplaireStat
         List<ExemplaireStatut> statuts = findStatutsByExemplaireOrderByDateDesc(idExemplaire);
         return statuts.isEmpty() ? Optional.empty() : Optional.of(statuts.get(0));
     }
+
+    // @Query("""
+    //     SELECT se.nomStatut
+    //     FROM ExemplaireStatut es
+    //     JOIN es.statutExemplaire se
+    //     WHERE es.exemplaire.idExemplaire = :idExemplaire
+    //     ORDER BY es.dateStatut DESC
+    //     LIMIT 1
+    // """)
+    // String findDernierStatutParExemplaire(@Param("idExemplaire") Integer idExemplaire);
+
+    // @Query("SELECT es FROM ExemplaireStatut es " +
+    //        "WHERE es.exemplaire.idExemplaire = :idExemplaire " +
+    //        "ORDER BY es.dateStatut DESC LIMIT 1")
+    // Optional<ExemplaireStatut> findDernierStatut(@Param("idExemplaire") Integer idExemplaire);
 }
 

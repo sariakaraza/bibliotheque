@@ -1,5 +1,7 @@
 package com.springjpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Exemplaire {
 
     @ManyToOne
     @JoinColumn(name = "id_livre", nullable = false)
+    @JsonBackReference
     private Livre livre;
 
     public Integer getIdExemplaire() {

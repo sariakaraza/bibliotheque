@@ -2,6 +2,8 @@ package com.springjpa.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +25,7 @@ public class Livre {
     private String auteur;
 
     @OneToMany(mappedBy = "livre", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Exemplaire> exemplaires;
 
     public Livre() {}

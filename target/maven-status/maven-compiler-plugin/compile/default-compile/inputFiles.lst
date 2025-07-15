@@ -1,7 +1,9 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/TypePretRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/BibliothecaireRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Categorie.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/ApiLivreController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/LoginController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/dto/ExemplaireDTO.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/Main.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ExemplaireRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/PretRepository.java
@@ -20,6 +22,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/RetourRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Prolongement.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/TypePret.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/dto/LivreAvecExemplairesDTO.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Penalite.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Reservation.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Adherant.java
