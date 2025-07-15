@@ -11,6 +11,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/AbonnementRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/ApiAdherantController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/StatutExemplaire.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/JourFerie.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/LivreService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/PenaliteRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/ExemplaireStatut.java
@@ -19,6 +20,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/service/ReservationService.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Abonnement.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/QuotaTypePretId.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/JourFerieRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Exemplaire.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/RetourRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Prolongement.java
@@ -33,6 +35,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/AdherantRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/StatutExemplaireRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/AdherantController.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/WeekendRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ProfilRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ReservationRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Livre.java
@@ -42,6 +45,7 @@
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Retour.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/ExemplaireStatutRepository.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Bibliothecaire.java
+/home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/entity/Weekend.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/dto/EtatAdherantDTO.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/controller/RetourController.java
 /home/sariaka/Documents/cours L2/SPRING/bibliotheque/src/main/java/com/springjpa/repository/CategorieRepository.java

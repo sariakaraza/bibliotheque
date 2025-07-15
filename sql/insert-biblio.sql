@@ -179,3 +179,11 @@ INSERT INTO statut_reservation (nom_statut) VALUES
 
 INSERT INTO exemplaire_statut (date_statut, id_exemplaire, id_statut_exemplaire)
 VALUES (NOW(), 1, 3);
+
+INSERT INTO jour_ferie (date_jour_ferie, nom, decalage) VALUES
+('2025-01-01', 'Nouvel An', 1),
+('2025-12-31', 'Reveillon', 1),
+('2025-12-25', 'Noel', 1),
+('2025-11-01', 'Toussaint', 1);
+
+INSERT INTO weekend (decalage) VALUES (1);
