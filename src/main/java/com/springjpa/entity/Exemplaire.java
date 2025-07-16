@@ -16,6 +16,17 @@ public class Exemplaire {
     @JsonBackReference
     private Livre livre;
 
+    @Column(name = "libelle", nullable = false)
+    private String libelle;
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Integer getIdExemplaire() {
         return idExemplaire;
     }

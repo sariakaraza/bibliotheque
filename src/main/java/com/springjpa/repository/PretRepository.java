@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.springjpa.entity.Pret;
+import com.springjpa.entity.Prolongement;
 import com.springjpa.entity.TypePret;
 
 @Repository
@@ -26,7 +27,7 @@ public interface PretRepository extends JpaRepository<Pret, Integer> {
     @Query("SELECT p FROM Pret p WHERE p.idPret NOT IN (SELECT r.pret.idPret FROM Retour r)")
     List<Pret> findAllPretsNonRetournes();
                                       
-
+  
     List<Pret> findByAdherant_IdAdherant(Integer idAdherant); 
     
     // @Query("SELECT COUNT(p) FROM Pret p WHERE p.adherant.idAdherant = :idAdherant " +

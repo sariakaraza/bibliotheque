@@ -68,8 +68,5 @@ public class EtatAdherantDTO {
     }
     public void setQuotaRestantAjd(Integer quotaRestantAjd) {
         this.quotaRestantAjd = quotaRestantAjd;
-    }
-  
-
-    
+    }    
 }

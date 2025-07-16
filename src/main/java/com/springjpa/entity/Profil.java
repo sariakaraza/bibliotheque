@@ -16,6 +16,9 @@ public class Profil {
     private Integer quotaReservation;
     private Double cotisation;
     private Integer dureePenalite;
+    
+    // Nouvelle colonne prolongement
+    private Integer prolongement;
 
     @OneToMany(mappedBy = "profil")
     private List<Adherant> adherants;
@@ -71,6 +74,14 @@ public class Profil {
         this.dureePenalite = dureePenalite;
     }
 
+    public Integer getProlongement() {
+        return prolongement;
+    }
+
+    public void setProlongement(Integer prolongement) {
+        this.prolongement = prolongement;
+    }
+
     public List<Adherant> getAdherants() {
         return adherants;
     }
@@ -78,7 +89,6 @@ public class Profil {
     public void setAdherants(List<Adherant> adherants) {
         this.adherants = adherants;
     }
-
 
     public List<DureePret> getDureesPret() {
         return dureesPret;

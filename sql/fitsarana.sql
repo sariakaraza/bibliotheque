@@ -136,3 +136,10 @@ VALUES
 ('2025-08-17', 'Dimanche', 1),
 ('2025-07-26', 'Jour férié', 1),
 ('2025-07-19', 'Jour férié', 1);
+
+UPDATE exemplaire SET libelle = 'MIS001' WHERE idExemplaire = 1;
+UPDATE exemplaire SET libelle = 'MIS002' WHERE idExemplaire = 2;
+UPDATE exemplaire SET libelle = 'MIS003' WHERE idExemplaire = 3;
+UPDATE exemplaire SET libelle = 'ETR001' WHERE idExemplaire = 4;
+UPDATE exemplaire SET libelle = 'ETR002' WHERE idExemplaire = 5;
+UPDATE exemplaire SET libelle = 'HAR001' WHERE idExemplaire = 6;

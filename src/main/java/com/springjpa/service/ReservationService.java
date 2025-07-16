@@ -30,6 +30,11 @@ public class ReservationService {
         Exemplaire exemplaire = exemplaireRepository.findById(idExemplaire)
             .orElseThrow(() -> new IllegalArgumentException("Exemplaire introuvable"));
 
+        // long nbReservationsActives = reservationRepository.countActiveReservationsByAdherantId(idAdherant);
+        // if (nbReservationsActives >= adherant.getProfil().getQuotaReservation()) {
+        //     throw new IllegalStateException("Quota de réservation dépassé.");
+        // }
+
         // Création de la réservation
         Reservation reservation = new Reservation();
         reservation.setAdherant(adherant);
