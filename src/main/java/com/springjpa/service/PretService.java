@@ -66,16 +66,16 @@ public class PretService {
     
         LocalDateTime datePret = inputDateDebut != null ? inputDateDebut : LocalDateTime.now();
     
+        TypePret typePret = getTypePretOrThrow(idTypePret);
         verifierPenaliteAdherant(adherant, datePret.toLocalDate());
+        if (!"Sur place".equalsIgnoreCase(typePret.getType())) {
+            verifierQuotaPret(adherant, datePret);
+        }
         verifierAbonnementActif(adherant, datePret);
         // verifierAucunPretNonRetourne(adherant);
         verifierAucunPretEchuNonRetourne(adherant, datePret);
 
-        TypePret typePret = getTypePretOrThrow(idTypePret);
     
-        if (!"Sur place".equalsIgnoreCase(typePret.getType())) {
-            verifierQuotaPret(adherant, datePret);
-        }
     
         Bibliothecaire bibliothecaire = getBibliothecaireParDefaut();
     

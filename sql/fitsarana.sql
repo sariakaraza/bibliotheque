@@ -143,3 +143,7 @@ UPDATE exemplaire SET libelle = 'MIS003' WHERE idExemplaire = 3;
 UPDATE exemplaire SET libelle = 'ETR001' WHERE idExemplaire = 4;
 UPDATE exemplaire SET libelle = 'ETR002' WHERE idExemplaire = 5;
 UPDATE exemplaire SET libelle = 'HAR001' WHERE idExemplaire = 6;
+
+INSERT INTO abonnement (date_debut, date_fin, id_adherant)
+VALUES 
+('2025-07-25 00:00:00', '2025-12-24 00:00:00', 1);
