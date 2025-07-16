@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.springjpa.entity.*;
 import com.springjpa.repository.*;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PretService {
 
@@ -55,21 +57,25 @@ public class PretService {
     @Autowired
     private WeekendRepository weekendRepository;
 
+    @Autowired
+    private RetourRepository retourRepository;
+
     public void effectuerPret(Integer idAdherant, Integer idExemplaire, Integer idTypePret, LocalDateTime inputDateDebut) {
         Adherant adherant = getAdherantOrThrow(idAdherant);
         Exemplaire exemplaire = getExemplaireOrThrow(idExemplaire);
     
         LocalDateTime datePret = inputDateDebut != null ? inputDateDebut : LocalDateTime.now();
     
-        verifierPenaliteAdherant(adherant, datePret.toLocalDate());
-        verifierAbonnementActif(adherant, datePret);
-        verifierRestrictionAge(adherant, exemplaire);
-    
         TypePret typePret = getTypePretOrThrow(idTypePret);
-    
+        verifierPenaliteAdherant(adherant, datePret.toLocalDate());
         if (!"Sur place".equalsIgnoreCase(typePret.getType())) {
             verifierQuotaPret(adherant, datePret);
         }
+        verifierAbonnementActif(adherant, datePret);
+        // verifierAucunPretNonRetourne(adherant);
+        verifierAucunPretEchuNonRetourne(adherant, datePret);
+
+    
     
         Bibliothecaire bibliothecaire = getBibliothecaireParDefaut();
     
@@ -83,10 +89,24 @@ public class PretService {
         if ("Sur place".equalsIgnoreCase(typePret.getType())) {
             pret.setDateFin(datePret);
         } else {
-            // int duree = getDureePretPourProfil(adherant.getProfil());
-            // pret.setDateFin(datePret.plusDays(duree));
             int duree = getDureePretPourProfil(adherant.getProfil());
             LocalDateTime dateFinPrevue = datePret.plusDays(duree);
+            verifierAbonnementActif(adherant, dateFinPrevue);
+            
+            // si adherent n'est plus abonne a la dateFinPrevue
+            // Abonnement abonnementActuel = abonnementRepository
+            //     .findByAdherant_IdAdherant(idAdherant).stream()
+            //     .filter(ab -> 
+            //         !ab.getDateDebut().isAfter(datePret) &&
+            //         !ab.getDateFin().isBefore(datePret)
+            //     )
+            //     .findFirst()
+            //     .orElseThrow(() -> new IllegalStateException("Aucun abonnement actif trouvé pour cette date"));
+            // LocalDateTime dateFinLimitee = abonnementActuel.getDateFin();
+            // if (dateFinPrevue.isAfter(dateFinLimitee)) {
+            //     dateFinPrevue = dateFinLimitee;
+            // }
+
             LocalDateTime dateFinAjustee = ajusterSiNonOuvrable(dateFinPrevue);
             pret.setDateFin(dateFinAjustee);
         }
@@ -112,6 +132,32 @@ public class PretService {
         exemplaireStatutRepository.save(nouveauStatut);
 
     }
+
+    // private void verifierAucunPretNonRetourne(Adherant adherant) {
+    //     List<Pret> prets = pretRepository.findByAdherant_IdAdherant(adherant.getIdAdherant());
+    
+    //     for (Pret pret : prets) {
+    //         boolean retourExiste = retourRepository.existsByPret_IdPret(pret.getIdPret());
+    //         if (!retourExiste) {
+    //             throw new IllegalStateException("Vous avez un prêt non encore retourné (ID prêt : " + pret.getIdPret() + "). Impossible de faire un nouveau prêt.");
+    //         }
+    //     }
+    // }
+    
+    private void verifierAucunPretEchuNonRetourne(Adherant adherant, LocalDateTime dateNouveauPret) {
+        List<Pret> anciensPrets = pretRepository.findByAdherant_IdAdherant(adherant.getIdAdherant());
+    
+        for (Pret pret : anciensPrets) {
+            boolean estRetourne = retourRepository.existsByPret_IdPret(pret.getIdPret());
+            boolean estDepasse = pret.getDateFin().isBefore(dateNouveauPret);
+    
+            if (!estRetourne && estDepasse) {
+                throw new IllegalStateException(
+                    "Vous avez un prêt (ID " + pret.getIdPret() + ") dont la date de retour est dépassée mais non encore retourné. Impossible de faire un nouveau prêt."
+                );
+            }
+        }
+    }
     
     private Adherant getAdherantOrThrow(Integer idAdherant) {
         return adherantRepository.findById(idAdherant)
@@ -129,17 +175,6 @@ public class PretService {
         );
         if (!actif) {
             throw new IllegalStateException("Adhérent inactif à la date de prêt");
-        }
-    }
-    
-    private void verifierRestrictionAge(Adherant adherant, Exemplaire exemplaire) {
-        Livre livre = exemplaire.getLivre();
-        if (livre.getAgeRestriction() != null) {
-            int age = Period.between(adherant.getDateNaissance(), LocalDate.now()).getYears();
-            if (age < livre.getAgeRestriction()) {
-                throw new IllegalStateException("Adhérent trop jeune pour emprunter ce livre (restriction : " 
-                    + livre.getAgeRestriction() + " ans)");
-            }
         }
     }
     
@@ -185,17 +220,82 @@ public class PretService {
         return pretRepository.findByAdherant_IdAdherant(idAdherant);
     }
 
-    public void demanderProlongement(Integer idPret) {
-        Pret pret = pretRepository.findById(idPret)
-            .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
+    // public void demanderProlongement(Integer idPret) {
+    //     Pret pret = pretRepository.findById(idPret)
+    //         .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
 
-        Prolongement prolongement = new Prolongement();
-        prolongement.setPret(pret);
-        prolongement.setDateProlongement(pret.getDateFin());
-        prolongement.setStatut("en attente");
+    //     Prolongement prolongement = new Prolongement();
+    //     prolongement.setPret(pret);
+    //     prolongement.setDateProlongement(pret.getDateFin());
+    //     prolongement.setStatut("en attente");
 
-        prolongementRepository.save(prolongement);
+    //     prolongementRepository.save(prolongement);
+    // }
+
+    // @Transactional
+    // public void demanderProlongement(Integer idPret) {
+    //     Pret pret = pretRepository.findById(idPret)
+    //         .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
+
+    //     Adherant adherant = pret.getAdherant();
+
+    //     // Compter les prolongements en attente pour cet adhérent
+    //     long nbProlongementsEnAttente = prolongementRepository.countProlongementsEnAttenteByAdherantId(adherant.getIdAdherant());
+
+    //     // Vérifier si le quota est dépassé
+    //     if (nbProlongementsEnAttente >= adherant.getProfil().getProlongement()) {
+    //         throw new IllegalStateException("Quota de prolongement en attente dépassé.");
+    //     }
+
+    //     // Créer la demande de prolongement
+    //     Prolongement prolongement = new Prolongement();
+    //     prolongement.setPret(pret);
+    //     prolongement.setDateProlongement(pret.getDateFin());
+    //     prolongement.setStatut("en attente");
+
+    //     prolongementRepository.save(prolongement);
+    // }
+
+    @Transactional
+public void demanderProlongement(Integer idPret) {
+    Pret pret = pretRepository.findById(idPret)
+        .orElseThrow(() -> new IllegalArgumentException("Prêt introuvable"));
+
+    Adherant adherant = pret.getAdherant();
+    Profil profil = adherant.getProfil();
+
+    // 1. Obtenir la durée de prêt pour le profil
+    int dureePret = dureePretRepository.findByProfil(profil)
+        .orElseThrow(() -> new IllegalStateException("Durée de prêt non définie pour ce profil"))
+        .getDuree();
+
+    // 2. Récupérer les prolongements "en attente" de cet adhérent
+    List<Prolongement> enAttente = prolongementRepository.findEnAttenteByAdherant(adherant.getIdAdherant());
+
+    // 3. Filtrer ceux dont la période est encore active maintenant
+    LocalDateTime now = LocalDateTime.now();
+    long nbActifs = enAttente.stream()
+        .filter(p -> {
+            LocalDateTime debut = p.getDateProlongement();
+            LocalDateTime fin = debut.plusDays(dureePret);
+            return !now.isBefore(debut) && now.isBefore(fin);
+        })
+        .count();
+
+    // 4. Vérifier le quota
+    if (nbActifs >= profil.getProlongement()) {
+        throw new IllegalStateException("Quota de prolongements en cours atteint.");
     }
+
+    // 5. Créer le nouveau prolongement
+    Prolongement prolongement = new Prolongement();
+    prolongement.setPret(pret);
+    prolongement.setDateProlongement(pret.getDateFin());
+    prolongement.setStatut("en attente");
+
+    prolongementRepository.save(prolongement);
+}
+
 
     public LocalDateTime ajusterSiNonOuvrable(LocalDateTime dateInitiale) {
         int decalageWeekend = Optional.ofNullable(weekendRepository.findPremier())
@@ -221,7 +321,7 @@ public class PretService {
     
     
     private boolean estWeekend(LocalDate date) {
-        return date.getDayOfWeek().getValue() >= 6; // 6 = samedi, 7 = dimanche
+        return date.getDayOfWeek().getValue() >= 7; 
     }
     
     private boolean estFerie(LocalDate date) {

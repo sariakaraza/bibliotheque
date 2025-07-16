@@ -42,6 +42,8 @@ public class PretController {
     @Autowired
     private ProlongementRepository prolongementRepository;
 
+    @Autowired
+    private PretRepository pretRepository;
 
     @GetMapping("/mes-prets")
     public String afficherPretsAdherant(Model model, HttpSession session) {
@@ -50,7 +52,7 @@ public class PretController {
         List<Pret> prets = pretService.listerPretsParAdherant(idAdherant);
         model.addAttribute("mesPrets", prets);
 
-        return "mes-prets"; // 👉 page JSP à créer
+        return "mes-prets";
     }
 
 
@@ -62,11 +64,13 @@ public class PretController {
         List<Reservation> reservationsValidees = reservationRepository.findByStatut("valide");
         List<Prolongement> prolongementsValides = prolongementRepository.findByStatut("valide");
 
+        List<Pret> prets = pretRepository.findAll();
+
         model.addAttribute("adherants", adherants);
         model.addAttribute("exemplaires", exemplaires);
         model.addAttribute("reservationsValidees", reservationsValidees);
         model.addAttribute("prolongementsValides", prolongementsValides);
-
+        model.addAttribute("prets", prets); 
 
         return "pret";
     }

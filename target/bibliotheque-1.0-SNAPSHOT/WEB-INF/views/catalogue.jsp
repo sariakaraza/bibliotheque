@@ -27,6 +27,7 @@
                         <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Auteur</th>
                         <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Annee</th>
                         <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Numero Exemplaire</th>
+                        <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Nom Exemplaire</th>
                         <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Statut</th>
                         <c:if test="${sessionScope.userType == 'adherant'}">
                             <th style="font-size: 18px; padding: 12px; background-color: var(--primary-color); color: white;">Date Reservation</th>
@@ -54,6 +55,9 @@
                                 
                                 <td style="font-size: 16px; padding: 10px; text-align: center;">
                                     ${ex.idExemplaire}
+                                </td>
+                                <td style="font-size: 16px; padding: 10px; text-align: center;">
+                                    ${ex.libelle}
                                 </td>
                                 <td style="font-size: 16px; padding: 10px;">
                                     <span class="statut">${ex.dernierStatutTemporaire}</span>
