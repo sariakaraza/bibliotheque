@@ -28,5 +28,16 @@ public interface PretRepository extends JpaRepository<Pret, Integer> {
                                       
 
     List<Pret> findByAdherant_IdAdherant(Integer idAdherant); 
-                                
+    
+    // @Query("SELECT COUNT(p) FROM Pret p WHERE p.adherant.idAdherant = :idAdherant " +
+    //     "AND p.dateFin < :dateNow AND p.dateRetour IS NULL")
+    // long countPretsEnRetardNonRendus(@Param("idAdherant") Integer idAdherant,
+    //                                 @Param("dateNow") LocalDateTime dateNow);
+    // @Query("SELECT COUNT(p) FROM Pret p " +
+    //     "WHERE p.adherant.idAdherant = :idAdherant " +
+    //     "AND p.dateFin < :dateNow " +
+    //     "AND p.dateRetour IS NULL")
+    // long countPretsEnRetardNonRendus(@Param("idAdherant") Integer idAdherant,
+    //                             @Param("dateNow") LocalDateTime dateNow);
+
 }

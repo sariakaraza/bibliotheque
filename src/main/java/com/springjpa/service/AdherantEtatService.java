@@ -58,7 +58,9 @@ public class AdherantEtatService {
 
         // Vérifier s’il est pénalisé aujourd’hui
         boolean estPenaliseAjd = penaliteRepository.isAdherantPenalise(idAdherant, now.toLocalDate());
-
+        // boolean estPenaliseAjd = penaliteRepository.isAdherantPenalise(idAdherant, now.toLocalDate())
+        // || pretRepository.countPretsEnRetardNonRendus(idAdherant, now) > 0;
+    
         int quotaMax = adherant.getProfil().getQuotaPret();
         TypePret typeSurPlace = typePretRepository.findByType("Sur place")
             .orElseThrow(() -> new IllegalStateException("Type 'Sur place' introuvable"));

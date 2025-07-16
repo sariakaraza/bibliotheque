@@ -63,7 +63,7 @@ public class PretService {
     
         verifierPenaliteAdherant(adherant, datePret.toLocalDate());
         verifierAbonnementActif(adherant, datePret);
-        verifierRestrictionAge(adherant, exemplaire);
+        // verifierRestrictionAge(adherant, exemplaire);
     
         TypePret typePret = getTypePretOrThrow(idTypePret);
     
@@ -132,16 +132,16 @@ public class PretService {
         }
     }
     
-    private void verifierRestrictionAge(Adherant adherant, Exemplaire exemplaire) {
-        Livre livre = exemplaire.getLivre();
-        if (livre.getAgeRestriction() != null) {
-            int age = Period.between(adherant.getDateNaissance(), LocalDate.now()).getYears();
-            if (age < livre.getAgeRestriction()) {
-                throw new IllegalStateException("Adhérent trop jeune pour emprunter ce livre (restriction : " 
-                    + livre.getAgeRestriction() + " ans)");
-            }
-        }
-    }
+    // private void verifierRestrictionAge(Adherant adherant, Exemplaire exemplaire) {
+    //     Livre livre = exemplaire.getLivre();
+    //     if (livre.getAgeRestriction() != null) {
+    //         int age = Period.between(adherant.getDateNaissance(), LocalDate.now()).getYears();
+    //         if (age < livre.getAgeRestriction()) {
+    //             throw new IllegalStateException("Adhérent trop jeune pour emprunter ce livre (restriction : " 
+    //                 + livre.getAgeRestriction() + " ans)");
+    //         }
+    //     }
+    // }
     
     private TypePret getTypePretOrThrow(Integer idTypePret) {
         return typePretRepository.findById(idTypePret)
@@ -221,7 +221,7 @@ public class PretService {
     
     
     private boolean estWeekend(LocalDate date) {
-        return date.getDayOfWeek().getValue() >= 6; // 6 = samedi, 7 = dimanche
+        return date.getDayOfWeek().getValue() >= 7; 
     }
     
     private boolean estFerie(LocalDate date) {
